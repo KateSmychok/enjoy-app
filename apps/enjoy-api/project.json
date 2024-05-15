@@ -19,6 +19,14 @@
           "buildTarget": "enjoy-api:build:production"
         }
       }
+    },
+    "generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["./generate.sh"],
+        "cwd": "apps/enjoy-api",
+        "parallel": false
+      }
     }
   }
 }

@@ -48,3 +48,5 @@ Thumbs.db
 .env.production
 .env.production.local
 .env.local
+
+swagger.json

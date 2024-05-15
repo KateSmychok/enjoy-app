@@ -1,0 +1,10 @@
+{
+  "apiPackage": "api",
+  "modelPackage": "models",
+  "snapshot": false,
+  "supportsES6": true,
+  "modelPropertyNaming": "original",
+  "withInterfaces": true,
+  "withSeparateModelsAndApi": true,
+  "stringEnums": true
+}
