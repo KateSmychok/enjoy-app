@@ -29,12 +29,12 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    this.setState({error, errorInfo});
+    this.setState({ error, errorInfo });
   }
 
   public render(): React.ReactNode {
-    const {fallback} = this.props;
-    const {error, errorInfo} = this.state;
+    const { fallback } = this.props;
+    const { error, errorInfo } = this.state;
 
     if (error) {
       if (React.isValidElement(fallback)) {
@@ -45,7 +45,7 @@ class ErrorBoundary extends React.Component<Props, State> {
         return fallback({
           error,
           componentStack: errorInfo?.componentStack,
-          resetError: () => this.setState({error: null, errorInfo: null}),
+          resetError: () => this.setState({ error: null, errorInfo: null }),
         });
       }
       return null;
@@ -72,4 +72,4 @@ function withErrorBoundary(
   );
 }
 
-export {ErrorBoundary, withErrorBoundary, ErrorFallbackProps};
+export { ErrorBoundary, withErrorBoundary, ErrorFallbackProps };

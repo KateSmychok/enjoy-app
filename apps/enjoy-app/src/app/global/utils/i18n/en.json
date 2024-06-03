@@ -1,0 +1,7 @@
+{
+  "RETRY_PANEL": {
+    "MESSAGE": "Could not load data. Please check your connection and try again",
+    "ERROR_MESSAGE": "An error has occurred. Please try again later",
+    "RETRY": "Retry"
+  }
+}

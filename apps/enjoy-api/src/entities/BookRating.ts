@@ -1,5 +1,5 @@
-import { Entity, Property } from "@mikro-orm/core";
-import { BaseEntity } from "./base.entity";
+import { Entity, Property } from '@mikro-orm/core';
+import { BaseEntity } from './base.entity';
 
 export interface RatingInput {
   bookId: number;
@@ -7,7 +7,7 @@ export interface RatingInput {
   value: number;
 }
 
-@Entity({tableName: 'book_rating'})
+@Entity({ tableName: 'book_rating' })
 export class BookRating extends BaseEntity {
   constructor(input: RatingInput) {
     super();

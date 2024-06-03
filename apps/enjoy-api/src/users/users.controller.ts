@@ -1,19 +1,17 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { UserDto } from "./dto/user.dto";
-import { UsersService } from "./users.service";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { Roles } from "../auth/roles-auth.decorator";
-import { RolesGuard } from "../auth/roles.guard";
-import { JwtAuthGuard } from "../auth/jwt-auth.guard";
-import { User } from "../entities/User";
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UserDto } from './dto/user.dto';
+import { UsersService } from './users.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { Roles } from '../auth/roles-auth.decorator';
+import { RolesGuard } from '../auth/roles.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { User } from '../entities/User';
 
 @Controller({ path: 'users' })
 @ApiTags('users')
 export class UsersController {
-  constructor(
-    private usersService: UsersService
-  ) {}
+  constructor(private usersService: UsersService) {}
 
   @Roles('ADMIN')
   @UseGuards(RolesGuard)

@@ -13,8 +13,16 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "@global/*": ["apps/enjoy-app/src/app/global/*"],
+      "@assets/*": ["apps/enjoy-app/src/assets/*"],
+      "@generated/*": ["apps/enjoy-api/src/generated/*"]
+    }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
 }

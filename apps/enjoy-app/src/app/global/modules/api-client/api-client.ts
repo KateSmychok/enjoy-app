@@ -1,5 +1,7 @@
-import axios, {AxiosInstance} from 'axios';
-import {ToastType} from "../../utils/enum";
+import axios, { AxiosInstance } from 'axios';
+import { ToastType } from '../../utils/enum';
+import { AuthApi, BookRatingApi, BooksApi, UsersApi } from '@generated/index';
+import { environmentLocal } from '../../../environments/environment.local';
 
 export interface IApiClient {
   auth: AuthApi;
@@ -17,25 +19,19 @@ export class ApiClient implements IApiClient {
   private readonly ax: AxiosInstance;
 
   constructor(setToastMsg: (msg: string, type: ToastType) => void) {
-    const baseURL = process.env.API_URL;
+    const baseURL = environmentLocal.apiUrl;
     this.ax = axios.create({ baseURL });
 
     this.ax.interceptors.request.use(
-      (config) => {
-        const token = localStorage.getItem('access-token');
-
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
-        }
-
-        return config;
-      },
+      (config) => config,
       (error) => {
         const errorMessage =
-          error.response?.data?.errorDisplay || error.message || 'Unexpected error';
+          error.response?.data?.errorDisplay ||
+          error.message ||
+          'Unexpected error';
         setToastMsg(errorMessage, ToastType.Failed);
         return Promise.reject(error);
-      }
+      },
     );
 
     this.ax.interceptors.response.use(
@@ -43,23 +39,21 @@ export class ApiClient implements IApiClient {
       (error) => {
         const canBeHandledByApp = error.response?.data?.isResolvable ?? false;
 
-        if (
-          !canBeHandledByApp &&
-          !error.__CANCEL__ &&
-          !error.response
-        ) {
+        if (!canBeHandledByApp && !error.__CANCEL__ && !error.response) {
           const errorMessage =
-            error.response?.data?.errorDisplay || error.message || 'Unexpected error';
+            error.response?.data?.errorDisplay ||
+            error.message ||
+            'Unexpected error';
           setToastMsg(errorMessage, ToastType.Failed);
         }
 
         return Promise.reject(error);
-      }
+      },
     );
 
-    this.auth = new AuthApi(null, baseURL, this.ax);
-    this.users = new UsersApi(null, baseURL, this.ax);
-    this.books = new BooksApi(null, baseURL, this.ax);
-    this.bookRating = new BookRatingApi(null, baseURL, this.ax);
+    this.auth = new AuthApi(null as any, baseURL, this.ax);
+    this.users = new UsersApi(null as any, baseURL, this.ax);
+    this.books = new BooksApi(null as any, baseURL, this.ax);
+    this.bookRating = new BookRatingApi(null as any, baseURL, this.ax);
   }
 }

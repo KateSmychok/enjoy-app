@@ -1,9 +1,9 @@
-import { Inject, Injectable, Scope } from "@nestjs/common";
-import { REQUEST } from "@nestjs/core";
-import { GiveBookRatingDto } from "./dto/give-book-rating.dto";
-import { InjectRepository } from "@mikro-orm/nestjs";
-import { EntityManager, EntityRepository } from "@mikro-orm/mysql";
-import { BookRating } from "../entities/BookRating";
+import { Inject, Injectable, Scope } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
+import { GiveBookRatingDto } from './dto/give-book-rating.dto';
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { EntityManager, EntityRepository } from '@mikro-orm/mysql';
+import { BookRating } from '../entities/BookRating';
 
 @Injectable({ scope: Scope.REQUEST })
 export class BookRatingService {
@@ -16,7 +16,10 @@ export class BookRatingService {
 
   async findUserBookRating(bookId: number) {
     const { id } = this.request.user;
-    const existingRating = this.bookRatingRepository.findOne({ userId: id, bookId });
+    const existingRating = this.bookRatingRepository.findOne({
+      userId: id,
+      bookId,
+    });
     return existingRating;
   }
 

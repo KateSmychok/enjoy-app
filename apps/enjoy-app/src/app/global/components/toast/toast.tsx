@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { ReactComponent as CloseIcon } from '../../../assets/icons/glyphs-control-close.svg';
+import { ReactComponent as CloseIcon } from '../../../../assets/icons/close.svg';
 import { ToastType } from '../../utils/enum';
 import { toastVariants } from './constants';
 

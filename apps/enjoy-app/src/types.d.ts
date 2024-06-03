@@ -7,6 +7,7 @@ declare module '@emotion/react' {
     fontSize: string;
     color: string;
     fontWeight: number;
+    fontStyle?: string;
   }
 
   export interface IThemeButton {
@@ -29,29 +30,18 @@ declare module '@emotion/react' {
   export interface Theme {
     colours: {
       background: string;
-      backgroundNonActive: string;
+      backgroundAlt: string;
       border: string;
-      calendarBackground: string;
-      calendarActiveBackground: string;
-      calendarActiveText: string;
-      calendarCancel: string;
-      calendarWeekend: string;
-      danger: string;
-      careIcon: string;
-      carerIcon: string;
-      controlBorder: string;
-      darkBorder: string;
-      highlight: string;
-      icon: string;
       primary: string;
-      primaryDark: string;
       primaryText: string;
       error: string;
+      shadow: string;
       infoBorder: string;
       infoBackground: string;
 
       toasts: {
         error: IToastStyle;
+        success: IToastStyle;
       };
     };
     buttons: {
@@ -62,13 +52,16 @@ declare module '@emotion/react' {
     };
     fontFamilies: {
       sansSerif: string;
-      monospace: string;
     };
     fontWeights: {
       light: number;
       normal: number;
       medium: number;
       semibold: number;
+    };
+    fontStyles: {
+      normal: string;
+      italic: string;
     };
     breakpoints: {
       md: string;
@@ -91,46 +84,14 @@ declare module '@emotion/react' {
       lg: string;
     };
     textStyles: {
-      bodyBlack: ITextStyle;
-      bodyBlackMedium: ITextStyle;
-      bodyBlackSemibold: ITextStyle;
-      bodyBlackLargeMedium: ITextStyle;
       bodyBlackSmall: ITextStyle;
-      bodyBlackSmallMedium: ITextStyle;
-
-      bodyGray: ITextStyle;
-      bodyGraySmall: ITextStyle;
-      bodyGrayMedium: ITextStyle;
-
-      bodyDarkGray: ITextStyle;
-      bodyDarkGrayMedium: ITextStyle;
-
-      label: ITextStyle;
+      bodyBlackMiddle: ITextStyle;
+      bodyBlackLarge: ITextStyle;
+      titleS: ITextStyle;
+      titleM: ITextStyle;
+      titleL: ITextStyle;
+      titleBook: ITextStyle;
       labelSmall: ITextStyle;
-      linkButtonText: ITextStyle;
-      minorGrey: ITextStyle;
-      minorBlack: ITextStyle;
-      navMenuItem: ITextStyle;
-      navMenuItemActive: ITextStyle;
-      summaryText: ITextStyle;
-      summaryTextBlack: ITextStyle;
-
-      title: ITextStyle;
-      titleMedium: ITextStyle;
-      titleLarge: ITextStyle;
-      titleXS: ITextStyle;
-
-      titleXXL: ITextStyle;
-      titleXXLLight: ITextStyle;
-      titleXXLMedium: ITextStyle;
-      titleXXLSemiBold: ITextStyle;
-
-      titleXL: ITextStyle;
-      titleXLMedium: ITextStyle;
-      titleXLLight: ITextStyle;
-      titleXLSemiBold: ITextStyle;
-
-      titleXSMedium: ITextStyle;
     };
     borderRadius: string;
   }

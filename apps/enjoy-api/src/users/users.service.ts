@@ -1,9 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { EntityManager, EntityRepository, FindOptions } from "@mikro-orm/mysql";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { User } from "../entities/User";
-import { InjectRepository } from "@mikro-orm/nestjs";
-import { UsersMapper } from "./user.mapper";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { EntityManager, EntityRepository, FindOptions } from '@mikro-orm/mysql';
+import { CreateUserDto } from './dto/create-user.dto';
+import { User } from '../entities/User';
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { UsersMapper } from './user.mapper';
 
 @Injectable()
 export class UsersService {
@@ -30,7 +30,10 @@ export class UsersService {
   async createUser(input: CreateUserDto) {
     const { email, password, name } = input;
     if (!email || !password) {
-      throw new HttpException('Email or password not provided', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Email or password not provided',
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
     const user = new User({

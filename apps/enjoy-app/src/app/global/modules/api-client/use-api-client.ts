@@ -1,6 +1,6 @@
 import React from 'react';
-import {ApiClient} from '.';
-import {ApiClientContext} from './api-client-context';
+import { ApiClient } from '.';
+import { ApiClientContext } from './api-client-context';
 
 export function useApiClient() {
   const ctx = React.useContext<ApiClient>(ApiClientContext);

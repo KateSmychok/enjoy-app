@@ -6,5 +6,5 @@ export enum BookAction {
 export enum BookType {
   InProgress = 'in-progress',
   Completed = 'completed',
-  Planned = 'planned'
+  Planned = 'planned',
 }

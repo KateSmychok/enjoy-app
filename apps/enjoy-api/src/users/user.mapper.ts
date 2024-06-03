@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
-import { User } from "../entities/User";
-import { UserDto } from "./dto/user.dto";
+import { Injectable } from '@nestjs/common';
+import { User } from '../entities/User';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UsersMapper {
@@ -22,10 +22,10 @@ export class UsersMapper {
 
     const booksCompleted = await user.booksCompleted.init();
     dto.booksCompleted = Array.from(booksCompleted).map((b) => ({
-        id: b.id,
-        author: b.author,
-        title: b.title,
-      }));
+      id: b.id,
+      author: b.author,
+      title: b.title,
+    }));
 
     const booksPlanned = await user.booksPlanned.init();
     dto.booksPlanned = Array.from(booksPlanned).map((b) => ({

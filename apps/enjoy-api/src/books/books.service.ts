@@ -1,11 +1,12 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { InjectRepository } from "@mikro-orm/nestjs";
-import { EntityManager, EntityRepository } from "@mikro-orm/mysql";
-import { Book } from "../entities/Book";
-import { CreateBookDto } from "./dto/create-book.dto";
-import { BooksMapper } from "./book.mapper";
-import { BookRating } from "../entities/BookRating";
-import { GetBooksQuery } from "./queries/get-books.query";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { EntityManager, EntityRepository } from '@mikro-orm/mysql';
+import { Book } from '../entities/Book';
+import { CreateBookDto } from './dto/create-book.dto';
+import { BooksMapper } from './book.mapper';
+import { BookRating } from '../entities/BookRating';
+import { GetBooksQuery } from './queries/get-books.query';
+import { slice } from 'lodash';
 
 @Injectable()
 export class BooksService {
@@ -21,7 +22,7 @@ export class BooksService {
 
   async getAllBooks() {
     const books = await this.getBooksQuery.getAllBooks();
-    return books;
+    return slice(books, 0, 250);
   }
 
   async getBooksByAuthor(author: string) {
@@ -31,7 +32,10 @@ export class BooksService {
 
   async addNewBook(input: CreateBookDto) {
     if (!input.author || !input.title) {
-      throw new HttpException('Author or title not provided', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Author or title not provided',
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
     const book = new Book({

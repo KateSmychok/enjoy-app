@@ -36,7 +36,14 @@ export const ToastProvider = (props: Props) => {
   return (
     <ToastContext.Provider value={{ setToast }}>
       {props.children}
-      {!!toastMsg && <Toast open={!!toastMsg} text={toastMsg} onClose={onClose} type={toastType} />}
+      {!!toastMsg && (
+        <Toast
+          open={!!toastMsg}
+          text={toastMsg}
+          onClose={onClose}
+          type={toastType}
+        />
+      )}
     </ToastContext.Provider>
   );
 };

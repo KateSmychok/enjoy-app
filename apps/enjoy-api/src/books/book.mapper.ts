@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
-import { BookDto } from "./dto/book.dto";
-import { Book } from "../entities/Book";
+import { Injectable } from '@nestjs/common';
+import { BookDto } from './dto/book.dto';
+import { Book } from '../entities/Book';
 
 @Injectable()
 export class BooksMapper {

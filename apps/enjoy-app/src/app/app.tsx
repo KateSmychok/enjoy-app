@@ -1,13 +1,16 @@
-import {css, Theme} from '@emotion/react';
-import {ErrorBoundary} from "./global/utils/error-boundary";
+import { css, Theme } from '@emotion/react';
+import { ErrorBoundary } from '@global/utils/error-boundary';
+import { AppRoutes } from './routes';
+import Header from './layouts/header';
 
 export const App = () => {
   return (
     <div css={(theme) => containerStyles(theme)}>
+      <Header />
       <main css={mainStyles}>
         <div>
           <ErrorBoundary fallback={() => null}>
-            <h1>{'Hi'}</h1>
+            <AppRoutes />
           </ErrorBoundary>
         </div>
       </main>
@@ -16,34 +19,11 @@ export const App = () => {
 };
 
 const containerStyles = (theme: Theme) => css`
-  ${theme.textStyles.summaryText};
   font-family: ${theme.fontFamilies.sansSerif};
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-left: calc(100vw - 100%);
-
-  & > div {
-    display: flex;
-    flex-direction: column;
-    background-color: ${theme.colours.backgroundNonActive};
-    margin-left: calc(100% - 100vw);
-    padding-left: calc(100vw - 100%);
-  }
-
-  & > div > div {
-    width: 80vw;
-    margin-left: auto;
-    margin-right: auto;
-
-    @media only screen and (max-width: 1921px) {
-      width: calc(100vw - 80px);
-    }
-
-    @media only screen and (max-width: 1200px) {
-      width: calc(100vw - 40px);
-    }
-  }
+  background-color: ${theme.colours.background};
 `;
 
 const mainStyles = () => css`
@@ -61,11 +41,11 @@ const mainStyles = () => css`
     display: flex;
     flex-direction: column;
 
-    @media only screen and (max-width: 1921px) {
+    @media only screen and (max-width: 2048px) {
       width: calc(100vw - 80px);
     }
 
-    @media only screen and (max-width: 1200px) {
+    @media only screen and (max-width: 1280px) {
       width: calc(100vw - 40px);
     }
   }

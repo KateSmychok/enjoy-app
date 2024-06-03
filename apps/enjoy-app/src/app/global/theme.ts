@@ -6,7 +6,7 @@ const defaultFontSizes = {
   md: '16px',
   lg: '18px',
   xl: '20px',
-  xxl: '28px',
+  xxl: '40px',
 };
 
 const defaultLineHeights = {
@@ -21,16 +21,17 @@ const defaultFontWeights = {
   semibold: 600,
 };
 
-const baseColors = {
-  primary: '#9a26d6',
-  backgroundDisabled: '#f5f5f6',
-  backgroundDisabledAlt: '#dcd9e4',
-  background: 'white',
-  border: '#edecf1',
-  controlBorder: '#dcd9e4',
-  primaryText: 'white',
-  icon: '#968caf',
+const defaultFontStyles = {
+  normal: 'normal',
+  italic: 'italic',
+};
 
+const baseColors = {
+  primary: '#6cd575',
+  gold: '#Ebd62b',
+  background: 'white',
+  backgroundAlt: '#f5f5f6',
+  primaryText: 'white',
   text: '#000000',
   textSecondary: '#808080',
   textTertiary: '#333333',
@@ -38,47 +39,38 @@ const baseColors = {
   textDarkGray: '#b3b3b3',
   textDisabled: '#cccccc',
   textDisabledWhiteBg: '#d9d9d9',
-
+  border: '#edecf1',
+  borderDisabled: '#e6e6e6',
   title: '#4d4d4d',
-  passPurple: '#6d1b98',
-  error: '#e31c4a',
-
-  statusGood: '#e8f1e8',
-  statusNeutral: '#e6e6e6',
-  statusNote: '#f7f4ed',
-  statusBad: '#f2dedf',
+  error: '#e32636',
+  shadow: '#a6a6a6',
 };
 
 const defaultColours = {
   background: baseColors.background,
-  backgroundNonActive: baseColors.backgroundDisabled,
+  backgroundAlt: baseColors.backgroundAlt,
   border: baseColors.border,
-  controlBorder: baseColors.controlBorder,
-  careIcon: 'white',
-  carerIcon: baseColors.textGray,
-  danger: 'red',
+  shadow: baseColors.shadow,
 
   infoBorder: '#007cba',
   infoBackground: '#edf9ff',
 
-  calendarBackground: baseColors.border,
-  calendarActiveBackground: baseColors.passPurple,
-  calendarActiveText: 'white',
-  calendarCancel: '#6d1b98',
-  calendarWeekend: '#271c4a0d',
+  warningBorder: '#f0a23f',
+  warningBackground: '#f7f4ed',
 
-  darkBorder: '#cac6d7',
-  highlight: '#b173c7',
-  icon: baseColors.icon,
   primary: baseColors.primary,
   primaryText: baseColors.primaryText,
-  primaryDark: baseColors.passPurple,
   error: baseColors.error,
 
   toasts: {
+    success: {
+      backgroundColor: '#d7EED6',
+      color: '#00D93A',
+    },
+
     error: {
-      backgroundColor: 'rgb(238, 214, 215)',
-      color: 'rgb(217, 0, 58)',
+      backgroundColor: '#f2dedf',
+      color: '#e32636',
     },
   },
 };
@@ -87,6 +79,7 @@ const defaultTheme: Theme = {
   fontSizes: defaultFontSizes,
   colours: defaultColours,
   fontWeights: defaultFontWeights,
+  fontStyles: defaultFontStyles,
   textStyles: {
     bodyBlackSmall: {
       fontSize: defaultFontSizes.sm,
@@ -94,59 +87,40 @@ const defaultTheme: Theme = {
       color: baseColors.text,
       fontWeight: defaultFontWeights.normal,
     },
-    bodyBlackSmallMedium: {
-      fontSize: defaultFontSizes.sm,
-      color: baseColors.text,
-      fontWeight: defaultFontWeights.medium,
-    },
-    bodyBlack: {
+    bodyBlackMiddle: {
       fontSize: defaultFontSizes.md,
+      lineHeight: defaultLineHeights.md,
       color: baseColors.text,
       fontWeight: defaultFontWeights.normal,
     },
-    bodyBlackMedium: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.text,
-      fontWeight: defaultFontWeights.medium,
-    },
-    bodyBlackSemibold: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.text,
-      fontWeight: defaultFontWeights.semibold,
-    },
-    bodyBlackLargeMedium: {
+    bodyBlackLarge: {
       fontSize: defaultFontSizes.lg,
+      lineHeight: defaultLineHeights.md,
       color: baseColors.text,
-      fontWeight: defaultFontWeights.medium,
-    },
-    bodyDarkGray: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.textTertiary,
       fontWeight: defaultFontWeights.normal,
     },
-    bodyDarkGrayMedium: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.textTertiary,
-      fontWeight: defaultFontWeights.medium,
-    },
-    bodyGray: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.textGray,
+    titleS: {
+      fontSize: defaultFontSizes.lg,
+      lineHeight: defaultLineHeights.md,
+      color: baseColors.text,
       fontWeight: defaultFontWeights.normal,
     },
-    bodyGraySmall: {
+    titleM: {
+      fontSize: defaultFontSizes.xl,
+      lineHeight: defaultLineHeights.md,
+      color: baseColors.text,
+      fontWeight: defaultFontWeights.normal,
+    },
+    titleL: {
+      fontSize: defaultFontSizes.xxl,
+      lineHeight: defaultLineHeights.md,
+      color: baseColors.text,
+      fontWeight: defaultFontWeights.normal,
+    },
+    titleBook: {
       fontSize: defaultFontSizes.sm,
-      color: baseColors.textGray,
-      fontWeight: defaultFontWeights.normal,
-    },
-    bodyGrayMedium: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.textGray,
-      fontWeight: defaultFontWeights.medium,
-    },
-    label: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.textTertiary,
+      lineHeight: defaultLineHeights.md,
+      color: baseColors.text,
       fontWeight: defaultFontWeights.normal,
     },
     labelSmall: {
@@ -154,112 +128,11 @@ const defaultTheme: Theme = {
       color: baseColors.textTertiary,
       fontWeight: defaultFontWeights.normal,
     },
-    linkButtonText: {
-      fontSize: defaultFontSizes.lg,
-      fontWeight: defaultFontWeights.medium,
-      color: baseColors.primary,
-    },
-    minorGrey: {
-      fontSize: defaultFontSizes.xs,
-      color: baseColors.textSecondary,
-      fontWeight: defaultFontWeights.normal,
-    },
-    minorBlack: {
-      fontSize: defaultFontSizes.xs,
-      color: '#000000',
-      fontWeight: defaultFontWeights.normal,
-    },
-    navMenuItemActive: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.text,
-      fontWeight: defaultFontWeights.medium,
-    },
-    navMenuItem: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.textTertiary,
-      fontWeight: defaultFontWeights.normal,
-    },
-    summaryText: {
-      fontSize: defaultFontSizes.sm,
-      color: baseColors.text,
-      fontWeight: defaultFontWeights.normal,
-    },
-    summaryTextBlack: {
-      fontSize: defaultFontSizes.sm,
-      color: baseColors.text,
-      fontWeight: defaultFontWeights.medium,
-    },
-    title: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.normal,
-    },
-    titleMedium: {
-      fontSize: defaultFontSizes.md,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.medium,
-    },
-    titleXS: {
-      fontSize: defaultFontSizes.xs,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.normal,
-    },
-    titleLarge: {
-      fontSize: defaultFontSizes.lg,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.medium,
-    },
-    titleXL: {
-      fontSize: defaultFontSizes.xl,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.normal,
-    },
-    titleXSMedium: {
-      fontSize: defaultFontSizes.xs,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.medium,
-    },
-    titleXLMedium: {
-      fontSize: defaultFontSizes.xl,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.medium,
-    },
-    titleXLLight: {
-      fontSize: defaultFontSizes.xl,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.light,
-    },
-    titleXLSemiBold: {
-      fontSize: defaultFontSizes.xl,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.semibold,
-    },
-    titleXXL: {
-      fontSize: defaultFontSizes.xxl,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.normal,
-    },
-    titleXXLLight: {
-      fontSize: defaultFontSizes.xxl,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.light,
-    },
-    titleXXLMedium: {
-      fontSize: defaultFontSizes.xxl,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.medium,
-    },
-    titleXXLSemiBold: {
-      fontSize: defaultFontSizes.xxl,
-      color: baseColors.title,
-      fontWeight: defaultFontWeights.semibold,
-    },
   },
   buttons: {
     primary: {
       background: baseColors.primary,
-      backgroundDisabled: baseColors.backgroundDisabled,
-      backgroundDisabledAlt: baseColors.backgroundDisabledAlt,
+      backgroundDisabled: baseColors.backgroundAlt,
       padding: '0 24px',
       textStyle: {
         color: baseColors.primaryText,
@@ -291,11 +164,11 @@ const defaultTheme: Theme = {
         fontWeight: defaultFontWeights.medium,
       },
       border: `2px solid ${baseColors.primary}`,
-      borderDisabled: `2px solid ${baseColors.statusNeutral}`,
+      borderDisabled: `2px solid ${baseColors.borderDisabled}`,
     },
     secondary: {
       background: baseColors.border,
-      backgroundDisabled: baseColors.backgroundDisabled,
+      backgroundDisabled: baseColors.backgroundAlt,
       padding: '0 24px',
       textStyle: {
         color: baseColors.title,
@@ -311,7 +184,7 @@ const defaultTheme: Theme = {
     invisible: {
       background: baseColors.background,
       textStyle: {
-        color: baseColors.icon,
+        color: baseColors.background,
         fontSize: defaultFontSizes.md,
         fontWeight: defaultFontWeights.normal,
       },
@@ -319,7 +192,6 @@ const defaultTheme: Theme = {
   },
   fontFamilies: {
     sansSerif: '"Roboto", Helvetica, Arial, sans-serif',
-    monospace: 'Menlo, Monaco, Consolas, "Courier New", monospace',
   },
   breakpoints: {
     md: '765px',

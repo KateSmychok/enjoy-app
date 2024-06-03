@@ -1,16 +1,15 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { CreateUserDto } from "../users/dto/create-user.dto";
-import { UsersService } from "../users/users.service";
-import { JwtService } from "@nestjs/jwt";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UsersService } from '../users/users.service';
+import { JwtService } from '@nestjs/jwt';
 import { hash, compare } from 'bcryptjs';
-import { User } from "../entities/User";
+import { User } from '../entities/User';
 
 @Injectable()
 export class AuthService {
-
   constructor(
     private usersService: UsersService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
   async login(input: CreateUserDto) {
@@ -20,10 +19,17 @@ export class AuthService {
 
   async register(input: CreateUserDto) {
     const existingUser = await this.usersService.getUserByEmail(input.email);
-    if (existingUser) throw new HttpException('The user with this email exists', HttpStatus.BAD_REQUEST);
+    if (existingUser)
+      throw new HttpException(
+        'The user with this email exists',
+        HttpStatus.BAD_REQUEST,
+      );
 
     const hashPassword = await hash(input.password, 5);
-    const user = await this.usersService.createUser({ email: input.email, password: hashPassword });
+    const user = await this.usersService.createUser({
+      email: input.email,
+      password: hashPassword,
+    });
     return this.generateToken(user);
   }
 
@@ -32,10 +38,10 @@ export class AuthService {
       email: user.email,
       id: user.id,
       roles: user.roles,
-    }
+    };
     return {
-      token: this.jwtService.sign(payload)
-    }
+      token: this.jwtService.sign(payload),
+    };
   }
 
   private async validateUser(input: CreateUserDto) {
@@ -48,7 +54,10 @@ export class AuthService {
     if (passwordsMatch) {
       return existingUser;
     } else {
-      throw new HttpException('The password is incorrect', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'The password is incorrect',
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 }

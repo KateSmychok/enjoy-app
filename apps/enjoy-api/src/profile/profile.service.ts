@@ -1,12 +1,18 @@
-import { HttpException, HttpStatus, Inject, Injectable, Scope } from "@nestjs/common";
-import { ProcessBookDto } from "./dto/process-book.dto";
-import { BookAction, BookType } from "../utils/enum";
-import { InjectRepository } from "@mikro-orm/nestjs";
-import { User } from "../entities/User";
-import { EntityManager, EntityRepository, FindOptions } from "@mikro-orm/mysql";
-import { Book } from "../entities/Book";
-import { UsersMapper } from "../users/user.mapper";
-import { REQUEST } from "@nestjs/core";
+import {
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+  Scope,
+} from '@nestjs/common';
+import { ProcessBookDto } from './dto/process-book.dto';
+import { BookAction, BookType } from '../utils/enum';
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { User } from '../entities/User';
+import { EntityManager, EntityRepository, FindOptions } from '@mikro-orm/mysql';
+import { Book } from '../entities/Book';
+import { UsersMapper } from '../users/user.mapper';
+import { REQUEST } from '@nestjs/core';
 
 @Injectable({ scope: Scope.REQUEST })
 export class ProfileService {
@@ -44,17 +50,23 @@ export class ProfileService {
 
     if (type === BookType.InProgress) {
       await user.booksInProgress.init();
-      action === BookAction.Add ? user.booksInProgress.add(book) : user.booksInProgress.remove(book);
+      action === BookAction.Add
+        ? user.booksInProgress.add(book)
+        : user.booksInProgress.remove(book);
     }
 
     if (type === BookType.Completed) {
       await user.booksCompleted.init();
-      action === BookAction.Add ? user.booksCompleted.add(book) : user.booksCompleted.remove(book);
+      action === BookAction.Add
+        ? user.booksCompleted.add(book)
+        : user.booksCompleted.remove(book);
     }
 
     if (type === BookType.Planned) {
       await user.booksPlanned.init();
-      action === BookAction.Add ? user.booksPlanned.add(book) : user.booksPlanned.remove(book);
+      action === BookAction.Add
+        ? user.booksPlanned.add(book)
+        : user.booksPlanned.remove(book);
     }
     await this.em.flush();
   }
