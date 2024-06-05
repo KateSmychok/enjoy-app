@@ -30,6 +30,7 @@ const baseColors = {
   primary: '#6cd575',
   gold: '#Ebd62b',
   background: 'white',
+  backgroundGray: '#edecf1',
   backgroundAlt: '#f5f5f6',
   primaryText: 'white',
   text: '#000000',
@@ -39,7 +40,7 @@ const baseColors = {
   textDarkGray: '#b3b3b3',
   textDisabled: '#cccccc',
   textDisabledWhiteBg: '#d9d9d9',
-  border: '#edecf1',
+  border: '#000000',
   borderDisabled: '#e6e6e6',
   title: '#4d4d4d',
   error: '#e32636',
@@ -99,6 +100,12 @@ const defaultTheme: Theme = {
       color: baseColors.text,
       fontWeight: defaultFontWeights.normal,
     },
+    bodyWhiteSmall: {
+      fontSize: defaultFontSizes.sm,
+      lineHeight: defaultLineHeights.md,
+      color: baseColors.primaryText,
+      fontWeight: defaultFontWeights.normal,
+    },
     titleS: {
       fontSize: defaultFontSizes.lg,
       lineHeight: defaultLineHeights.md,
@@ -126,6 +133,11 @@ const defaultTheme: Theme = {
     labelSmall: {
       fontSize: defaultFontSizes.sm,
       color: baseColors.textTertiary,
+      fontWeight: defaultFontWeights.normal,
+    },
+    errorSmall: {
+      fontSize: defaultFontSizes.sm,
+      color: baseColors.error,
       fontWeight: defaultFontWeights.normal,
     },
   },
@@ -167,7 +179,7 @@ const defaultTheme: Theme = {
       borderDisabled: `2px solid ${baseColors.borderDisabled}`,
     },
     secondary: {
-      background: baseColors.border,
+      background: baseColors.backgroundGray,
       backgroundDisabled: baseColors.backgroundAlt,
       padding: '0 24px',
       textStyle: {
@@ -182,7 +194,7 @@ const defaultTheme: Theme = {
       },
     },
     invisible: {
-      background: baseColors.background,
+      background: 'inherit',
       textStyle: {
         color: baseColors.background,
         fontSize: defaultFontSizes.md,

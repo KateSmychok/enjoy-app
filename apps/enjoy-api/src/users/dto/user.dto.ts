@@ -17,6 +17,12 @@ export class UserDto {
   @ApiProperty()
   roles: string;
 
+  @ApiProperty()
+  isActivated: boolean;
+
+  @ApiProperty()
+  activationLink: string;
+
   @ApiProperty({ type: [BookDto], isArray: true })
   booksInProgress: BookDto[];
 

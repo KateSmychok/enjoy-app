@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Theme } from '@emotion/react';
 
 export const rowContainerStyle = () => css`
   display: flex;
@@ -27,4 +27,13 @@ export const xCenteredStyle = () => css`
 export const yCenteredStyle = () => css`
   display: flex;
   align-items: center;
+`;
+
+export const labelStyle = (theme: Theme) => css`
+  ${theme.textStyles.bodyBlackSmall};
+`;
+
+export const errorTextStyle = (theme: Theme) => css`
+  padding-top: 2px;
+  ${theme.textStyles.errorSmall};
 `;

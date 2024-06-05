@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { ToastType } from '../../utils/enum';
 import { AuthApi, BookRatingApi, BooksApi, UsersApi } from '@generated/index';
-import { environmentLocal } from '../../../environments/environment.local';
+import { environment } from '../../../../environments/environment';
 
 export interface IApiClient {
   auth: AuthApi;
@@ -19,7 +19,7 @@ export class ApiClient implements IApiClient {
   private readonly ax: AxiosInstance;
 
   constructor(setToastMsg: (msg: string, type: ToastType) => void) {
-    const baseURL = environmentLocal.apiUrl;
+    const baseURL = environment.apiUrl;
     this.ax = axios.create({ baseURL });
 
     this.ax.interceptors.request.use(

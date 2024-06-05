@@ -28,7 +28,7 @@ export class UsersService {
   }
 
   async createUser(input: CreateUserDto) {
-    const { email, password, name } = input;
+    const { email, password, activationLink } = input;
     if (!email || !password) {
       throw new HttpException(
         'Email or password not provided',
@@ -38,8 +38,8 @@ export class UsersService {
 
     const user = new User({
       email,
-      name,
       password,
+      activationLink,
       roles: ['USER'], // hardcoded for new users with a role 'User'
     });
 

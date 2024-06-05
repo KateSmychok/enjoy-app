@@ -4,8 +4,8 @@ import { Book } from './Book';
 
 export interface UserInput {
   email: string;
-  name: string;
   password: string;
+  activationLink: string;
   roles: string[];
 }
 
@@ -15,8 +15,8 @@ export class User extends BaseEntity {
     super();
 
     this.email = input.email;
-    this.name = input.name;
     this.password = input.password;
+    this.activationLink = input.activationLink;
     this.roles = input.roles.join(',');
   }
 
@@ -31,6 +31,12 @@ export class User extends BaseEntity {
 
   @Property({ nullable: true })
   roles: string;
+
+  @Property({ nullable: true })
+  isActivated: boolean;
+
+  @Property({ nullable: true })
+  activationLink: string;
 
   @ManyToMany({
     entity: () => Book,

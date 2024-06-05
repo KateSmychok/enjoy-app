@@ -1,8 +1,7 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { Roles } from '../auth/roles-auth.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -28,12 +27,5 @@ export class UsersController {
   @ApiResponse({ status: 200, type: User })
   async getUserByEmail(@Param('email') email: string): Promise<User> {
     return this.usersService.getUserByEmail(email);
-  }
-
-  @Post('/')
-  @ApiOperation({ operationId: 'createUser' })
-  @ApiResponse({ status: 200, type: User })
-  async createUser(@Body() body: CreateUserDto): Promise<User> {
-    return this.usersService.createUser(body);
   }
 }

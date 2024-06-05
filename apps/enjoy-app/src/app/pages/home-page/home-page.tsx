@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { css, Theme } from '@emotion/react';
 import { BookDto } from '@generated/models';
 import { withErrorBoundary } from '@global/utils/error-boundary';
@@ -12,11 +13,23 @@ import {
 } from '@global/common-styles';
 import readingPeople from '@assets/pics/reading.jpeg';
 import { Pagination } from '@global/components/pagination/pagination';
+import { Modal } from '@global/components/modals/modal';
+import AuthForm from '../../layouts/forms/auth-form/auth-form';
 
 function HomePageInner() {
-  const { isLoading, relevantBooks, page, totalPages, onSetPage } = useHomePage();
+  const {
+    isLoading,
+    relevantBooks,
+    page,
+    totalPages,
+    onSetPage,
+    mode,
+    isLoggedIn,
+    isAuthModalOpened,
+    onCloseAuthModal,
+  } = useHomePage();
   return (
-    <>
+    <div id={'home-page'}>
       <div css={[columnContainerStyle, yCenteredStyle]}>
         <p css={(theme) => [containerStyle, titleStyle(theme)]}>
           {'Now reading'}
@@ -35,7 +48,14 @@ function HomePageInner() {
           </div>
         )}
       </div>
-    </>
+      {isAuthModalOpened &&
+        ReactDOM.createPortal(
+          <Modal onClose={onCloseAuthModal}>
+            <AuthForm />
+          </Modal>,
+          document.getElementById('home-page'),
+        )}
+    </div>
   );
 }
 

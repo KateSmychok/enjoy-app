@@ -17,6 +17,7 @@
     "baseUrl": "./",
     "paths": {
       "@global/*": ["apps/enjoy-app/src/app/global/*"],
+      "@store/*": ["apps/enjoy-app/src/app/store/*"],
       "@assets/*": ["apps/enjoy-app/src/assets/*"],
       "@generated/*": ["apps/enjoy-api/src/generated/*"]
     }

@@ -9,3 +9,8 @@ export enum ToastType {
   Success = 'success',
   Failed = 'failed',
 }
+
+export enum AuthMode {
+  Register = 'Register',
+  Login = 'Login',
+}

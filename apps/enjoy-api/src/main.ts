@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as fs from 'fs';
+import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,6 +10,8 @@ async function bootstrap() {
   app.enableCors({
     exposedHeaders: ['content-disposition'],
   });
+
+  app.use(cookieParser());
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('api')
@@ -20,7 +23,9 @@ async function bootstrap() {
   SwaggerModule.setup('/api/docs', app, swaggerDoc);
 
   const PORT = process.env.PORT || 3000;
-  await app.listen(Number(PORT), () => console.log(`Server started on port ${PORT}`));
+  await app.listen(Number(PORT), () =>
+    console.log(`Server started on port ${PORT}`),
+  );
 }
 
 bootstrap();

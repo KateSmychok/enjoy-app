@@ -87,6 +87,8 @@ declare module '@emotion/react' {
       bodyBlackSmall: ITextStyle;
       bodyBlackMiddle: ITextStyle;
       bodyBlackLarge: ITextStyle;
+      bodyWhiteSmall: ITextStyle;
+      errorSmall: ITextStyle;
       titleS: ITextStyle;
       titleM: ITextStyle;
       titleL: ITextStyle;

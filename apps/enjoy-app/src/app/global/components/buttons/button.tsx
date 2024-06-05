@@ -15,8 +15,8 @@ interface IButtonProps {
   dataTestId?: string;
   loading?: boolean;
   disabledCursor?: string;
-  transactionName?: string;
   alt?: boolean;
+  className?: string;
 }
 
 function ButtonComponent({
@@ -29,8 +29,8 @@ function ButtonComponent({
   ariaLabel,
   dataTestId,
   loading = false,
-  transactionName,
   alt = false,
+  className,
 }: IButtonProps) {
   const theme = useTheme();
 
@@ -46,8 +46,7 @@ function ButtonComponent({
       disabled={disabled || loading}
       aria-label={ariaLabel}
       data-testid={dataTestId}
-      data-transaction-name={transactionName ? transactionName : ariaLabel}
-      data-ignoreclick="true"
+      className={className}
     >
       {!loading && children}
       {loading && (

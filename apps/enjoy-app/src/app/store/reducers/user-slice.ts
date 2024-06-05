@@ -1,17 +1,20 @@
-import { BookDto } from '@generated/models';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface UserState {
-  id: number;
-  name: string;
-  booksInProgress: BookDto[];
-  booksCompleted: BookDto[];
-  booksPlanned: BookDto[];
+export interface IUser {
+  id: null;
+  name: null;
+  email: null;
+  isActivated: boolean;
+  booksInProgress: [];
+  booksCompleted: [];
+  booksPlanned: [];
 }
 
-const initialState: UserState = {
+const initialState: IUser = {
   id: null,
   name: null,
+  email: null,
+  isActivated: false,
   booksInProgress: [],
   booksCompleted: [],
   booksPlanned: [],
@@ -21,10 +24,11 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state: UserState, action: PayloadAction<UserState>) {
+    setUser(state: IUser, action: PayloadAction<IUser>) {
       return action.payload;
     },
   },
 });
 
+export const userSliceActions = userSlice.actions;
 export default userSlice.reducer;

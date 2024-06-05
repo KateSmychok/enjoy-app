@@ -8,7 +8,7 @@ import { ToastProvider } from '@global/modules/toast/toast-provider';
 import { ApiClientProvider } from '@global/modules/api-client';
 import App from './app/app';
 import { Provider } from 'react-redux';
-import { store } from './app/store/store';
+import { store } from '@store/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
