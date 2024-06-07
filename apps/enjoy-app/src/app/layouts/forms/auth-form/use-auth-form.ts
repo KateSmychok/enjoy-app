@@ -7,7 +7,7 @@ import { authSliceActions } from '@store/reducers/auth-slice';
 import { AuthMode } from '@global/utils/enum';
 import { userSliceActions } from '@store/reducers/user-slice';
 import { useApiClient } from '@global/modules/api-client';
-import {AuthUserInputDto, UserDto} from '@generated/models';
+import { AuthUserInputDto, UserDto } from '@generated/models';
 
 export const useAuthForm = () => {
   const client = useApiClient();

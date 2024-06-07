@@ -35,6 +35,7 @@ const containerStyle = (theme: Theme) => css`
   display: flex;
   flex-direction: row;
   height: 40px;
+  margin-bottom: 50px;
 
   .pagination {
     display: flex;

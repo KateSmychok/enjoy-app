@@ -9,9 +9,10 @@ import TopItemsList from '../../components/top-items-list';
 import {
   columnContainerStyle,
   rowContainerStyle,
+  spaceBetweenStyle,
   yCenteredStyle,
 } from '@global/common-styles';
-import readingPeople from '@assets/pics/reading.jpeg';
+import readingMan from '@assets/pics/main-pic-reading.jpg';
 import { Pagination } from '@global/components/pagination/pagination';
 import { Modal } from '@global/components/modals/modal';
 import AuthForm from '../../layouts/forms/auth-form/auth-form';
@@ -30,10 +31,29 @@ function HomePageInner() {
   } = useHomePage();
   return (
     <div id={'home-page'}>
-      <div css={[columnContainerStyle, yCenteredStyle]}>
-        <p css={(theme) => [containerStyle, titleStyle(theme)]}>
-          {'Now reading'}
-        </p>
+      <div css={[rowContainerStyle, spaceBetweenStyle, yCenteredStyle]}>
+        <ul css={(theme) => aboutBlockStyle(theme)}>
+          <li>
+            <p>
+              <span>{'Enjoy'}</span>
+              {' helps to choose an exciting book, series or game'}
+            </p>
+          </li>
+          <li>
+            <p>
+              <span>{'Enjoy'}</span>
+              {
+                ' lets you know what is trending among your friends and in the whole world'
+              }
+            </p>
+          </li>
+          <li>
+            <p>
+              <span>{'Enjoy'}</span>
+              {' connects people with similar interests'}
+            </p>
+          </li>
+        </ul>
         <div css={pictureStyle}></div>
       </div>
       <div css={rowContainerStyle}>
@@ -71,11 +91,10 @@ const containerStyle = () => css`
 `;
 
 const pictureStyle = () => css`
-  background: url(${readingPeople}) no-repeat;
-  background-size: auto 110%;
-  width: 100%;
-  max-width: 1700px;
-  height: 440px;
+  background: url(${readingMan}) no-repeat;
+  background-size: contain;
+  width: 70%;
+  height: 800px;
   margin-bottom: 60px;
 
   @media only screen and (max-width: 1536px) {
@@ -90,8 +109,17 @@ const pictureStyle = () => css`
   }
 `;
 
-const titleStyle = (theme: Theme) => css`
-  ${theme.textStyles.titleL}
+const aboutBlockStyle = (theme: Theme) => css`
+  width: 50%;
+  ${theme.textStyles.titleL};
+
+  li {
+    padding-bottom: 24px;
+  }
+
+  span {
+    color: ${theme.colours.primary};
+  }
 `;
 
 export default HomePage;

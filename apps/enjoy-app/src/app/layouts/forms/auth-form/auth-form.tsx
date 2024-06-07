@@ -6,8 +6,8 @@ import { Button } from '@global/components/buttons';
 import { AuthMode, ButtonType } from '@global/utils/enum';
 import { useAuthForm } from './use-auth-form';
 import { AuthUserInputDto } from '@generated/models';
-import LinkButton from "@global/components/buttons/link-button";
-import StaticText from "@global/components/static-text/static-text";
+import LinkButton from '@global/components/buttons/link-button';
+import StaticText from '@global/components/static-text/static-text';
 
 function AuthForm() {
   const { form, mode, onSubmit, onClose, onToggleMode } = useAuthForm();
@@ -19,7 +19,7 @@ function AuthForm() {
   if (mode === AuthMode.Register && isSubmitSuccessful) {
     return (
       <>
-        <StaticText text={'Please, check your email to confirm address' }/>
+        <StaticText text={'Please, check your email to confirm address'} />
         <div css={buttonsStyle}>
           <Button
             variant={ButtonType.SECONDARY}
@@ -30,7 +30,7 @@ function AuthForm() {
           </Button>
         </div>
       </>
-    )
+    );
   }
 
   return (
@@ -63,18 +63,16 @@ function AuthForm() {
           >
             {'Cancel'}
           </Button>
-          <Button
-            variant={ButtonType.PRIMARY}
-            type={'submit'}
-            disabled={false}
-          >
+          <Button variant={ButtonType.PRIMARY} type={'submit'} disabled={false}>
             {mode}
           </Button>
           <div>
             <StaticText
-              text={mode === AuthMode.Login
-                    ? 'Not registered yet?'
-                    : 'Already registered?'}
+              text={
+                mode === AuthMode.Login
+                  ? 'Not registered yet?'
+                  : 'Already registered?'
+              }
             />
             <LinkButton
               text={mode === AuthMode.Login ? 'Register' : 'Login'}

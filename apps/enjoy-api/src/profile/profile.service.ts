@@ -3,7 +3,8 @@ import {
   HttpStatus,
   Inject,
   Injectable,
-  Scope, UnauthorizedException,
+  Scope,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { ProcessBookDto } from './dto/process-book.dto';
 import { BookAction, BookType } from '../utils/enum';
@@ -41,7 +42,6 @@ export class ProfileService {
     const user = await this.em.findOneOrFail(User, { email }, options);
     return await this.usersMapper.userToDto(user);
   }
-
 
   async processBook(input: ProcessBookDto) {
     const { id } = this.request.user;

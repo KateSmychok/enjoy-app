@@ -1,5 +1,5 @@
-import React from "react";
-import {css, Theme} from "@emotion/react";
+import React from 'react';
+import { css, Theme } from '@emotion/react';
 
 interface IButtonProps {
   onClick: () => void;
@@ -7,11 +7,7 @@ interface IButtonProps {
   dataTestId?: string;
 }
 
-function LinkButton({
-  onClick,
-  text,
-  dataTestId,
-  }: IButtonProps) {
+function LinkButton({ onClick, text, dataTestId }: IButtonProps) {
   return (
     <button
       css={(theme) => btnStyle(theme)}
@@ -21,7 +17,7 @@ function LinkButton({
     >
       {text}
     </button>
-  )
+  );
 }
 
 const btnStyle = (theme: Theme) => css`

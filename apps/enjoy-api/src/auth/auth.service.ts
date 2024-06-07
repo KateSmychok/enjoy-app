@@ -1,4 +1,9 @@
-import {HttpException, HttpStatus, Injectable, UnauthorizedException} from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { AuthUserInputDto } from './dto/auth-user-input.dto';
 import { UsersService } from '../users/users.service';
@@ -153,11 +158,15 @@ export class AuthService {
       throw new UnauthorizedException({ message: 'Unauthorized' });
     }
 
-    const user: User = await this.userRepository.findOne({ id: existingToken.userId });
+    const user: User = await this.userRepository.findOne({
+      id: existingToken.userId,
+    });
     return await this.generateTokens(user);
   }
 
   private validateRefreshToken(refreshToken: string) {
-    return this.jwtService.verify(refreshToken, { secret: environment.jwtRefreshSecret });
+    return this.jwtService.verify(refreshToken, {
+      secret: environment.jwtRefreshSecret,
+    });
   }
 }

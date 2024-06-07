@@ -1,5 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {AuthMode} from '@global/utils/enum';
+import { createSlice } from '@reduxjs/toolkit';
+import { AuthMode } from '@global/utils/enum';
 
 interface AuthState {
   mode: AuthMode;
@@ -30,7 +30,8 @@ export const authSlice = createSlice({
       state.isAuthModalOpened = false;
     },
     toggleMode(state: AuthState) {
-      state.mode = state.mode === AuthMode.Login ? AuthMode.Register : AuthMode.Login;
+      state.mode =
+        state.mode === AuthMode.Login ? AuthMode.Register : AuthMode.Login;
     },
   },
 });

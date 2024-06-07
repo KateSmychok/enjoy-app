@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post, Req, Res} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
@@ -46,7 +46,7 @@ export class AuthController {
   async logout(
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
-    ) {
+  ) {
     const { refreshToken } = request.cookies;
     response.clearCookie('refreshToken');
     return this.authService.logout(refreshToken);

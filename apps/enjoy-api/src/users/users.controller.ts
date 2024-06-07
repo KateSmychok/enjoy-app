@@ -5,7 +5,7 @@ import { Roles } from '../auth/roles-auth.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { User } from '../entities/User';
-import {UserDto} from "./dto/user.dto";
+import { UserDto } from './dto/user.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller({ path: 'users' })

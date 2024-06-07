@@ -5,11 +5,11 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import { ButtonType } from '@global/utils/enum';
 import { authSliceActions } from '@store/reducers/auth-slice';
-import { Link } from "react-router-dom";
-import {userSliceActions} from "@store/reducers/user-slice";
-import {useApiClient} from "@global/modules/api-client";
-import {UserDto} from "@generated/models";
-import {rowContainerStyle, yCenteredStyle} from "@global/common-styles";
+import { Link } from 'react-router-dom';
+import { userSliceActions } from '@store/reducers/user-slice';
+import { useApiClient } from '@global/modules/api-client';
+import { UserDto } from '@generated/models';
+import { rowContainerStyle, yCenteredStyle } from '@global/common-styles';
 import profileIcon from '@assets/icons/profile.svg';
 
 function Header() {
@@ -28,7 +28,7 @@ function Header() {
     dispatch(authSliceActions.logOut());
     dispatch(userSliceActions.setUser({} as UserDto));
     localStorage.removeItem('token');
-    client.auth.logout()
+    client.auth.logout();
   };
 
   return (
@@ -48,8 +48,7 @@ function Header() {
               <span>{'Logout'}</span>
             </Button>
           </div>
-         )
-        }
+        )}
       </div>
     </header>
   );

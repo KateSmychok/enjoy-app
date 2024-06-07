@@ -1,9 +1,9 @@
-import {Body, Controller, Get, Param, Post, UseGuards} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BooksService } from './books.service';
 import { BookDto } from './dto/book.dto';
 import { CreateBookDto } from './dto/create-book.dto';
-import {JwtAuthGuard} from "../auth/jwt-auth.guard";
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('books')
 @ApiTags('books')

@@ -1,6 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
 import { ToastType } from '../../utils/enum';
-import { AuthApi, BookRatingApi, BooksApi, UsersApi, ProfileApi } from '@generated/index';
+import {
+  AuthApi,
+  BookRatingApi,
+  BooksApi,
+  UsersApi,
+  ProfileApi,
+} from '@generated/index';
 import { environment } from '../../../../environments/environment';
 
 export interface IApiClient {
@@ -30,9 +36,7 @@ export class ApiClient implements IApiClient {
         return config;
       },
       (error) => {
-        const errorMessage =
-          error.message ||
-          'Unexpected error';
+        const errorMessage = error.message || 'Unexpected error';
         setToastMsg(errorMessage, ToastType.Failed);
         return Promise.reject(error);
       },
@@ -42,10 +46,16 @@ export class ApiClient implements IApiClient {
       (response) => response,
       async (error) => {
         const originalReq = error.config;
-        if (error.config && !error.config._isRetry && error.response.status === 401) {
+        if (
+          error.config &&
+          !error.config._isRetry &&
+          error.response.status === 401
+        ) {
           originalReq._isRetry = true;
           try {
-            const res = await axios.get(`${baseURL}/auth/refresh`, {withCredentials: true});
+            const res = await axios.get(`${baseURL}/auth/refresh`, {
+              withCredentials: true,
+            });
             localStorage.setItem('token', res.data.accessToken);
             await this.ax.request(originalReq);
           } catch (e) {

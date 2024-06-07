@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {UserDto} from "@generated/models";
+import { UserDto } from '@generated/models';
 
 const initialState: UserDto = {
   id: null,

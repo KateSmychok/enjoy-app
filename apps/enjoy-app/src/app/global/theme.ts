@@ -6,7 +6,7 @@ const defaultFontSizes = {
   md: '16px',
   lg: '18px',
   xl: '20px',
-  xxl: '40px',
+  xxl: '36px',
 };
 
 const defaultLineHeights = {
@@ -115,7 +115,7 @@ const defaultTheme: Theme = {
       fontSize: defaultFontSizes.xxl,
       lineHeight: defaultLineHeights.md,
       color: baseColors.text,
-      fontWeight: defaultFontWeights.normal,
+      fontWeight: defaultFontWeights.medium,
     },
     labelSmall: {
       fontSize: defaultFontSizes.sm,
