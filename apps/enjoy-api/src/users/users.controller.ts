@@ -1,12 +1,13 @@
 import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 import { Roles } from '../auth/roles-auth.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { User } from '../entities/User';
+import {UserDto} from "./dto/user.dto";
 
+@UseGuards(JwtAuthGuard)
 @Controller({ path: 'users' })
 @ApiTags('users')
 export class UsersController {
@@ -21,7 +22,6 @@ export class UsersController {
     return this.usersService.getAllUsers();
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('/:email')
   @ApiOperation({ operationId: 'getUserByEmail' })
   @ApiResponse({ status: 200, type: User })

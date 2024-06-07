@@ -3,7 +3,7 @@ import {
   HttpStatus,
   Inject,
   Injectable,
-  Scope,
+  Scope, UnauthorizedException,
 } from '@nestjs/common';
 import { ProcessBookDto } from './dto/process-book.dto';
 import { BookAction, BookType } from '../utils/enum';
@@ -21,14 +21,18 @@ export class ProfileService {
     private readonly userRepository: EntityRepository<User>,
     @InjectRepository(Book)
     private readonly booksRepository: EntityRepository<Book>,
-    @Inject(REQUEST)
-    private readonly request,
     private readonly usersMapper: UsersMapper,
     private readonly em: EntityManager,
+    @Inject(REQUEST)
+    private readonly request,
   ) {}
 
   async getUserProfile() {
     const { email } = this.request.user;
+
+    if (!email) {
+      throw new UnauthorizedException({ message: 'Unauthorized' });
+    }
 
     const options: FindOptions<User, any, any> = {
       populate: ['booksInProgress', 'booksCompleted', 'booksPlanned'],
@@ -37,6 +41,7 @@ export class ProfileService {
     const user = await this.em.findOneOrFail(User, { email }, options);
     return await this.usersMapper.userToDto(user);
   }
+
 
   async processBook(input: ProcessBookDto) {
     const { id } = this.request.user;

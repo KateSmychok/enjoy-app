@@ -2,12 +2,6 @@ import React from 'react';
 import { css } from '@emotion/react';
 import closeIcon from '@assets/icons/close.svg';
 
-export interface BtnProps {
-  title: string;
-  disabled: boolean;
-  onClick?: () => void;
-}
-
 interface Props {
   onClose: () => void;
   children?: React.ReactNode;
@@ -42,7 +36,7 @@ const layoutStyle = () => css`
 const contentStyle = () => css`
   width: 70vw;
   max-width: 600px;
-  height: 400px;
+  min-height: 320px;
   background-color: #fff;
   border-radius: 6px;
   padding: 60px;

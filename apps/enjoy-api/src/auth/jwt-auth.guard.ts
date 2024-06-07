@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { JwtService } from '@nestjs/jwt';
+import {JwtService, JwtVerifyOptions} from '@nestjs/jwt';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -25,7 +25,7 @@ export class JwtAuthGuard implements CanActivate {
         throw new UnauthorizedException({ message: 'Unauthorized' });
       }
 
-      const user = this.jwtService.verify(token);
+      const user = this.jwtService.verify(token, { secret: process.env.JWT_ACCESS_SECRET } as JwtVerifyOptions);
       req.user = user;
 
       return true;

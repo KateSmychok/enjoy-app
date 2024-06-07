@@ -13,13 +13,12 @@ configuration.ts
 git_push.sh
 index.ts
 models/auth-response-dto.ts
-models/auth-user-dto.ts
+models/auth-user-input-dto.ts
 models/book-action.ts
 models/book-dto.ts
 models/book-type.ts
 models/create-book-dto.ts
 models/give-book-rating-dto.ts
 models/index.ts
-models/logout-user-dto.ts
 models/process-book-dto.ts
 models/user-dto.ts

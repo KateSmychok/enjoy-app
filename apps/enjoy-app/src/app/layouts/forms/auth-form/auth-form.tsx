@@ -5,14 +5,33 @@ import TextInput from '@global/components/text-input/text-input';
 import { Button } from '@global/components/buttons';
 import { AuthMode, ButtonType } from '@global/utils/enum';
 import { useAuthForm } from './use-auth-form';
-import { AuthUserDto } from '@generated/models';
+import { AuthUserInputDto } from '@generated/models';
+import LinkButton from "@global/components/buttons/link-button";
+import StaticText from "@global/components/static-text/static-text";
 
 function AuthForm() {
-  const { form, mode, onSubmit, onClose } = useAuthForm();
+  const { form, mode, onSubmit, onClose, onToggleMode } = useAuthForm();
   const {
     handleSubmit,
-    formState: { isValid },
+    formState: { isSubmitSuccessful },
   } = form;
+
+  if (mode === AuthMode.Register && isSubmitSuccessful) {
+    return (
+      <>
+        <StaticText text={'Please, check your email to confirm address' }/>
+        <div css={buttonsStyle}>
+          <Button
+            variant={ButtonType.SECONDARY}
+            onClick={onClose}
+            disabled={false}
+          >
+            {'Cancel'}
+          </Button>
+        </div>
+      </>
+    )
+  }
 
   return (
     <FormProvider {...form}>
@@ -21,14 +40,14 @@ function AuthForm() {
         data-testid={'auth-form'}
         css={formStyle}
       >
-        <TextInput<AuthUserDto>
+        <TextInput<AuthUserInputDto>
           id={'email'}
           fieldName={'email'}
           label={'Email'}
           placeholder={''}
           isRequired
         />
-        <TextInput<AuthUserDto>
+        <TextInput<AuthUserInputDto>
           id={'password'}
           fieldName={'password'}
           label={'Password'}
@@ -46,19 +65,22 @@ function AuthForm() {
           </Button>
           <Button
             variant={ButtonType.PRIMARY}
-            disabled={!isValid}
             type={'submit'}
+            disabled={false}
           >
             {mode}
           </Button>
-          <span>
-            {mode === AuthMode.Login
-              ? 'Not registered yet?'
-              : 'Already registered?'}
-          </span>
-          <Button variant={ButtonType.INVISIBLE}>
-            {mode === AuthMode.Login ? 'Register' : 'Login'}
-          </Button>
+          <div>
+            <StaticText
+              text={mode === AuthMode.Login
+                    ? 'Not registered yet?'
+                    : 'Already registered?'}
+            />
+            <LinkButton
+              text={mode === AuthMode.Login ? 'Register' : 'Login'}
+              onClick={onToggleMode}
+            />
+          </div>
         </div>
       </form>
     </FormProvider>
@@ -77,5 +99,6 @@ const buttonsStyle = () => css`
   position: absolute;
   bottom: 32px;
   display: flex;
+  align-items: center;
   gap: 16px;
 `;

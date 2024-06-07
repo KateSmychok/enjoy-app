@@ -1,9 +1,9 @@
 import * as yup from 'yup';
-import { AuthUserDto } from '@generated/models';
+import { AuthUserInputDto } from '@generated/models';
 
 export const authSchema = yup
   .object()
-  .shape<Record<keyof AuthUserDto, yup.AnySchema>>({
+  .shape<Record<keyof AuthUserInputDto, yup.AnySchema>>({
     email: yup
       .string()
       .email('Please input a valid email')

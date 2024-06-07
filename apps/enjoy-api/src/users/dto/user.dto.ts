@@ -1,27 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BookDto } from '../../books/dto/book.dto';
+import {BookDto} from "../../books/dto/book.dto";
 
 export class UserDto {
-  @ApiProperty()
+  @ApiProperty({ example: '1', description: 'id' })
   id: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'user@email.com', description: 'email' })
   email: string;
 
-  @ApiProperty()
-  password: string;
-
-  @ApiProperty()
+  @ApiProperty({ example: 'Kate', description: 'name' })
   name: string;
 
-  @ApiProperty()
-  roles: string;
-
-  @ApiProperty()
+  @ApiProperty({ example: true, description: 'account is activated' })
   isActivated: boolean;
-
-  @ApiProperty()
-  activationLink: string;
 
   @ApiProperty({ type: [BookDto], isArray: true })
   booksInProgress: BookDto[];

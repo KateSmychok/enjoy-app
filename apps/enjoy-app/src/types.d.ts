@@ -5,7 +5,7 @@ declare module '@emotion/react' {
     [key: string]: string | number;
 
     fontSize: string;
-    color: string;
+    color?: string;
     fontWeight: number;
     fontStyle?: string;
   }
@@ -33,7 +33,8 @@ declare module '@emotion/react' {
       backgroundAlt: string;
       border: string;
       primary: string;
-      primaryText: string;
+      textBlack: string;
+      textWhite: string;
       error: string;
       shadow: string;
       infoBorder: string;
@@ -84,15 +85,13 @@ declare module '@emotion/react' {
       lg: string;
     };
     textStyles: {
-      bodyBlackSmall: ITextStyle;
-      bodyBlackMiddle: ITextStyle;
-      bodyBlackLarge: ITextStyle;
-      bodyWhiteSmall: ITextStyle;
+      bodySmall: ITextStyle;
+      bodyMiddle: ITextStyle;
+      bodyLarge: ITextStyle;
       errorSmall: ITextStyle;
       titleS: ITextStyle;
       titleM: ITextStyle;
       titleL: ITextStyle;
-      titleBook: ITextStyle;
       labelSmall: ITextStyle;
     };
     borderRadius: string;

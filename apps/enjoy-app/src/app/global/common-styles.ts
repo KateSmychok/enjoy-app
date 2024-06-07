@@ -30,7 +30,8 @@ export const yCenteredStyle = () => css`
 `;
 
 export const labelStyle = (theme: Theme) => css`
-  ${theme.textStyles.bodyBlackSmall};
+  ${theme.textStyles.bodySmall};
+  color: ${theme.colours.textBlack};
 `;
 
 export const errorTextStyle = (theme: Theme) => css`

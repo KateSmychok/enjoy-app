@@ -4,9 +4,10 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { topBooksSliceActions } from '@store/reducers/top-books-slice';
 import { authSliceActions } from '@store/reducers/auth-slice';
 import { RootState } from '@store/store';
-import { slice } from 'lodash';
-import { BookDto } from '@generated/models';
+import {debounce, slice} from 'lodash';
+import {BookDto, UserDto} from '@generated/models';
 import { AuthMode } from '@global/utils/enum';
+import {userSliceActions} from "@store/reducers/user-slice";
 
 interface UseHomePage {
   isLoading: boolean;
@@ -48,27 +49,41 @@ export const useHomePage = (): UseHomePage => {
     dispatch(authSliceActions.closeAuthModal());
   };
 
-  const checkAuth = async () => {};
+  const checkAuth = async () => {
+    const { data } = await client.auth.refreshToken();
+    localStorage.setItem('token', data.accessToken);
+    dispatch(authSliceActions.logIn());
+    dispatch(userSliceActions.setUser(data.user as UserDto));
+  };
 
-  const init = async () => {
-    const res = await client.books.getAllBooks();
+  const getTopBooks = async () => {
+    const { data } = await client.books.getAllBooks();
     const skip = (page - 1) * rowsPerPage;
     const limit = skip + rowsPerPage;
 
-    dispatch(topBooksSliceActions.setAllBooks(res.data));
+    dispatch(topBooksSliceActions.setAllBooks(data));
     dispatch(
-      topBooksSliceActions.setRelevantBooks(slice(res.data, skip, limit)),
+      topBooksSliceActions.setRelevantBooks(slice(data, skip, limit)),
     );
     dispatch(
       topBooksSliceActions.setTotalPages(
-        Math.ceil(res.data.length / rowsPerPage),
+        Math.ceil(data.length / rowsPerPage),
       ),
     );
     dispatch(topBooksSliceActions.setIsLoading(false));
-  };
+  }
+
+  const debouncedInit = debounce(() => {
+    return init();
+  }, 200);
+
+  const init = async () => {
+    if (localStorage.getItem('token')) await checkAuth();
+    getTopBooks();
+  }
 
   useEffect(() => {
-    init();
+    debouncedInit();
   }, []);
 
   return {

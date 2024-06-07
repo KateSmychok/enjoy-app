@@ -3,7 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProfileService } from './profile.service';
 import { ProcessBookDto } from './dto/process-book.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { UserDto } from '../users/dto/user.dto';
+import {UserDto} from "../users/dto/user.dto";
 
 @UseGuards(JwtAuthGuard)
 @Controller({ path: 'profile' })

@@ -1,6 +1,6 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable, UnauthorizedException} from '@nestjs/common';
 import { InjectRepository } from '@mikro-orm/nestjs';
-import { AuthUserDto } from './dto/auth-user.dto';
+import { AuthUserInputDto } from './dto/auth-user-input.dto';
 import { UsersService } from '../users/users.service';
 import { MailService } from './mail.service';
 import { JwtService } from '@nestjs/jwt';
@@ -11,7 +11,6 @@ import { Token } from '../entities/Token';
 import { environment } from '../environments/environment';
 import { AuthResponseDto } from './dto/auth-response.dto';
 import { UsersMapper } from '../users/user.mapper';
-import { LogoutUserDto } from './dto/logout-user.dto';
 import { EntityManager, EntityRepository } from '@mikro-orm/mysql';
 
 @Injectable()
@@ -28,7 +27,7 @@ export class AuthService {
     private readonly tokenRepository: EntityRepository<Token>,
   ) {}
 
-  async register(input: AuthUserDto): Promise<AuthResponseDto> {
+  async register(input: AuthUserInputDto): Promise<AuthResponseDto> {
     const existingUser = await this.userRepository.findOne({
       email: input.email,
     });
@@ -55,12 +54,40 @@ export class AuthService {
     return await this.generateTokens(user);
   }
 
-  async login(input: AuthUserDto): Promise<AuthResponseDto> {
+  private async validateUser(input: AuthUserInputDto): Promise<User> {
+    const existingUser = await this.userRepository.findOne({
+      email: input.email,
+    });
+
+    if (!existingUser) {
+      throw new HttpException('The user not found', HttpStatus.NOT_FOUND);
+    }
+
+    if (!existingUser.isActivated) {
+      throw new HttpException(
+        'The email is not confirmed',
+        HttpStatus.FORBIDDEN,
+      );
+    }
+
+    const passwordsMatch = await compare(input.password, existingUser.password);
+    if (!passwordsMatch) {
+      throw new HttpException(
+        'The password is incorrect',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return existingUser;
+  }
+
+  async login(input: AuthUserInputDto): Promise<AuthResponseDto> {
     const user: User = await this.validateUser(input);
     return await this.generateTokens(user);
   }
 
-  async logout(input: LogoutUserDto) {}
+  async logout(token: string) {
+    await this.removeToken(token);
+  }
 
   async activateLink(activationLink: string) {
     const user = await this.userRepository.findOne({ activationLink });
@@ -71,8 +98,6 @@ export class AuthService {
     user.isActivated = true;
     await this.em.persistAndFlush(user);
   }
-
-  async refreshToken() {}
 
   private async generateTokens(user: User): Promise<AuthResponseDto> {
     const payload = {
@@ -110,22 +135,29 @@ export class AuthService {
     }
   }
 
-  private async validateUser(input: AuthUserDto): Promise<User> {
-    const existingUser = await this.userRepository.findOne({
-      email: input.email,
-    });
-    if (!existingUser) {
-      throw new HttpException('The user not found', HttpStatus.NOT_FOUND);
+  private async removeToken(refreshToken: string) {
+    const existingToken = await this.tokenRepository.findOne({ refreshToken });
+    if (existingToken) {
+      await this.em.remove(existingToken);
+    }
+  }
+
+  async refreshToken(refreshToken: string): Promise<AuthResponseDto> {
+    if (!refreshToken) {
+      throw new UnauthorizedException({ message: 'Unauthorized' });
     }
 
-    const passwordsMatch = await compare(input.password, existingUser.password);
-    if (passwordsMatch) {
-      return existingUser;
-    } else {
-      throw new HttpException(
-        'The password is incorrect',
-        HttpStatus.BAD_REQUEST,
-      );
+    const userData = this.validateRefreshToken(refreshToken);
+    const existingToken = await this.tokenRepository.findOne({ refreshToken });
+    if (!userData || !existingToken) {
+      throw new UnauthorizedException({ message: 'Unauthorized' });
     }
+
+    const user: User = await this.userRepository.findOne({ id: existingToken.userId });
+    return await this.generateTokens(user);
+  }
+
+  private validateRefreshToken(refreshToken: string) {
+    return this.jwtService.verify(refreshToken, { secret: environment.jwtRefreshSecret });
   }
 }

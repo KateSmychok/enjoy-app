@@ -124,7 +124,8 @@ const inputStyle = (theme: Theme, disabled: boolean) => css`
   border-radius: ${theme.borderRadius};
   background-color: transparent;
   cursor: ${disabled ? 'not-allowed' : 'auto'};
-  ${theme.textStyles.bodyBlackSmall}
+  ${theme.textStyles.bodySmall}
+  ${theme.colours.textBlack}
 
   &:-webkit-autofill,
   &:-webkit-autofill:focus {

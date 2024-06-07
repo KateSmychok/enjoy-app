@@ -29,11 +29,11 @@ const defaultFontStyles = {
 const baseColors = {
   primary: '#6cd575',
   gold: '#Ebd62b',
-  background: 'white',
+  background: '#fff',
   backgroundGray: '#edecf1',
   backgroundAlt: '#f5f5f6',
-  primaryText: 'white',
-  text: '#000000',
+  text: '#000',
+  textWhite: '#fff',
   textSecondary: '#808080',
   textTertiary: '#333333',
   textGray: '#a6a6a6',
@@ -60,7 +60,8 @@ const defaultColours = {
   warningBackground: '#f7f4ed',
 
   primary: baseColors.primary,
-  primaryText: baseColors.primaryText,
+  textBlack: baseColors.text,
+  textWhite: baseColors.textWhite,
   error: baseColors.error,
 
   toasts: {
@@ -82,28 +83,20 @@ const defaultTheme: Theme = {
   fontWeights: defaultFontWeights,
   fontStyles: defaultFontStyles,
   textStyles: {
-    bodyBlackSmall: {
+    bodySmall: {
       fontSize: defaultFontSizes.sm,
       lineHeight: defaultLineHeights.md,
-      color: baseColors.text,
       fontWeight: defaultFontWeights.normal,
     },
-    bodyBlackMiddle: {
+    bodyMiddle: {
       fontSize: defaultFontSizes.md,
       lineHeight: defaultLineHeights.md,
-      color: baseColors.text,
       fontWeight: defaultFontWeights.normal,
     },
-    bodyBlackLarge: {
+    bodyLarge: {
       fontSize: defaultFontSizes.lg,
       lineHeight: defaultLineHeights.md,
       color: baseColors.text,
-      fontWeight: defaultFontWeights.normal,
-    },
-    bodyWhiteSmall: {
-      fontSize: defaultFontSizes.sm,
-      lineHeight: defaultLineHeights.md,
-      color: baseColors.primaryText,
       fontWeight: defaultFontWeights.normal,
     },
     titleS: {
@@ -120,12 +113,6 @@ const defaultTheme: Theme = {
     },
     titleL: {
       fontSize: defaultFontSizes.xxl,
-      lineHeight: defaultLineHeights.md,
-      color: baseColors.text,
-      fontWeight: defaultFontWeights.normal,
-    },
-    titleBook: {
-      fontSize: defaultFontSizes.sm,
       lineHeight: defaultLineHeights.md,
       color: baseColors.text,
       fontWeight: defaultFontWeights.normal,
@@ -147,7 +134,7 @@ const defaultTheme: Theme = {
       backgroundDisabled: baseColors.backgroundAlt,
       padding: '0 24px',
       textStyle: {
-        color: baseColors.primaryText,
+        color: baseColors.textWhite,
         fontSize: defaultFontSizes.md,
         fontWeight: defaultFontWeights.medium,
       },

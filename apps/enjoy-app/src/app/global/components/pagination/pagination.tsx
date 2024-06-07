@@ -50,7 +50,8 @@ const containerStyle = (theme: Theme) => css`
     text-align: center;
     text-decoration: none;
     background-color: #fff;
-    ${theme.textStyles.bodyBlackMiddle}
+    ${theme.textStyles.bodyMiddle};
+    ${theme.colours.textBlack};
   }
   .pagination > li.active > a {
     color: #000;

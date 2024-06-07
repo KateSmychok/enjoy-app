@@ -1,16 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {UserDto} from "@generated/models";
 
-export interface IUser {
-  id: null;
-  name: null;
-  email: null;
-  isActivated: boolean;
-  booksInProgress: [];
-  booksCompleted: [];
-  booksPlanned: [];
-}
-
-const initialState: IUser = {
+const initialState: UserDto = {
   id: null,
   name: null,
   email: null,
@@ -24,7 +15,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state: IUser, action: PayloadAction<IUser>) {
+    setUser(state: UserDto, action: PayloadAction<UserDto>) {
       return action.payload;
     },
   },
