@@ -1,12 +1,16 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers/user-slice';
-import topBooksReducer from './reducers/top-books-slice';
+import booksReducer from './reducers/books-slice';
 import authReducer from './reducers/auth-slice';
+import homePageReducer from './reducers/home-page-slice';
+import profilePageReducer from './reducers/profile-page-slice';
 
 const rootReducer = combineReducers({
   authReducer,
   userReducer,
-  topBooksReducer,
+  booksReducer,
+  homePageReducer,
+  profilePageReducer,
 });
 
 export const store = configureStore({

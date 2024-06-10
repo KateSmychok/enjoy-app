@@ -17,11 +17,11 @@ export class BookDto {
   rating?: number;
 
   @ApiPropertyOptional()
-  readersInProgress?: number;
+  inProgress?: number;
 
   @ApiPropertyOptional()
-  readersCompleted?: number;
+  completed?: number;
 
   @ApiPropertyOptional()
-  readersPlanned?: number;
+  planned?: number;
 }

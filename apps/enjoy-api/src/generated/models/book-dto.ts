@@ -53,17 +53,17 @@ export interface BookDto {
    * @type {number}
    * @memberof BookDto
    */
-  readersInProgress?: number;
+  inProgress?: number;
   /**
    *
    * @type {number}
    * @memberof BookDto
    */
-  readersCompleted?: number;
+  completed?: number;
   /**
    *
    * @type {number}
    * @memberof BookDto
    */
-  readersPlanned?: number;
+  planned?: number;
 }

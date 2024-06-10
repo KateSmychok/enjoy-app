@@ -35,6 +35,7 @@ declare module '@emotion/react' {
       primary: string;
       textBlack: string;
       textWhite: string;
+      textSecondary: string;
       error: string;
       shadow: string;
       infoBorder: string;
@@ -70,11 +71,13 @@ declare module '@emotion/react' {
       xl: string;
     };
     fontSizes: {
-      xs: string;
       sm: string;
       md: string;
       lg: string;
-      xl: string;
+      titleSm: string;
+      titleMd: string;
+      titleL: string;
+      titleXl: string;
     };
     spacing: {
       xxxs: string;
@@ -92,6 +95,7 @@ declare module '@emotion/react' {
       titleS: ITextStyle;
       titleM: ITextStyle;
       titleL: ITextStyle;
+      titleItalicXL: ITextStyle;
       labelSmall: ITextStyle;
     };
     borderRadius: string;

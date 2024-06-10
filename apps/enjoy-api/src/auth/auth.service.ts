@@ -143,7 +143,7 @@ export class AuthService {
   private async removeToken(refreshToken: string) {
     const existingToken = await this.tokenRepository.findOne({ refreshToken });
     if (existingToken) {
-      await this.em.remove(existingToken);
+      await this.em.removeAndFlush(existingToken);
     }
   }
 

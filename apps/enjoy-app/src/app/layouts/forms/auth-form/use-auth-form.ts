@@ -29,14 +29,12 @@ export const useAuthForm = () => {
   };
 
   const handleRegister = async (inputValues: AuthUserInputDto) => {
-    const { data } = await client.auth.register(inputValues);
-    console.log(data);
+    await client.auth.register(inputValues);
   };
 
   const handleLogin = async (inputValues: AuthUserInputDto) => {
     const { data } = await client.auth.login(inputValues);
     const user = data.user;
-    console.log(data);
     localStorage.setItem('token', data.accessToken);
 
     dispatch(authSliceActions.closeAuthModal());

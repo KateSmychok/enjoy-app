@@ -1,12 +1,13 @@
 import { Theme } from '@emotion/react';
 
 const defaultFontSizes = {
-  xs: '12px',
   sm: '14px',
-  md: '16px',
-  lg: '18px',
-  xl: '20px',
-  xxl: '36px',
+  md: '18px',
+  lg: '24px',
+  titleSm: '32px',
+  titleMd: '36px',
+  titleL: '48px',
+  titleXl: '128px',
 };
 
 const defaultLineHeights = {
@@ -19,6 +20,8 @@ const defaultFontWeights = {
   normal: 400,
   medium: 500,
   semibold: 600,
+  bold: 700,
+  black: 900,
 };
 
 const defaultFontStyles = {
@@ -28,19 +31,19 @@ const defaultFontStyles = {
 
 const baseColors = {
   primary: '#6cd575',
-  gold: '#Ebd62b',
+  gold: '#F1C836',
   background: '#fff',
   backgroundGray: '#edecf1',
   backgroundAlt: '#f5f5f6',
-  text: '#000',
+  text: '#191919',
   textWhite: '#fff',
-  textSecondary: '#808080',
+  textSecondary: '#c2c2c2',
   textTertiary: '#333333',
   textGray: '#a6a6a6',
   textDarkGray: '#b3b3b3',
   textDisabled: '#cccccc',
   textDisabledWhiteBg: '#d9d9d9',
-  border: '#000000',
+  border: '#191919',
   borderDisabled: '#e6e6e6',
   title: '#4d4d4d',
   error: '#e32636',
@@ -52,6 +55,8 @@ const defaultColours = {
   backgroundAlt: baseColors.backgroundAlt,
   border: baseColors.border,
   shadow: baseColors.shadow,
+
+  textSecondary: baseColors.textSecondary,
 
   infoBorder: '#007cba',
   infoBackground: '#edf9ff',
@@ -96,30 +101,36 @@ const defaultTheme: Theme = {
     bodyLarge: {
       fontSize: defaultFontSizes.lg,
       lineHeight: defaultLineHeights.md,
-      color: baseColors.text,
       fontWeight: defaultFontWeights.normal,
     },
     titleS: {
-      fontSize: defaultFontSizes.lg,
+      fontSize: defaultFontSizes.titleSm,
       lineHeight: defaultLineHeights.md,
       color: baseColors.text,
-      fontWeight: defaultFontWeights.normal,
+      fontWeight: defaultFontWeights.semibold,
     },
     titleM: {
-      fontSize: defaultFontSizes.xl,
+      fontSize: defaultFontSizes.titleMd,
       lineHeight: defaultLineHeights.md,
       color: baseColors.text,
       fontWeight: defaultFontWeights.normal,
     },
     titleL: {
-      fontSize: defaultFontSizes.xxl,
+      fontSize: defaultFontSizes.titleL,
       lineHeight: defaultLineHeights.md,
       color: baseColors.text,
       fontWeight: defaultFontWeights.medium,
     },
+    titleItalicXL: {
+      fontSize: defaultFontSizes.titleXl,
+      lineHeight: defaultLineHeights.md,
+      color: baseColors.gold,
+      fontStyle: defaultFontStyles.italic,
+      fontWeight: defaultFontWeights.black,
+    },
     labelSmall: {
       fontSize: defaultFontSizes.sm,
-      color: baseColors.textTertiary,
+      color: baseColors.textSecondary,
       fontWeight: defaultFontWeights.normal,
     },
     errorSmall: {

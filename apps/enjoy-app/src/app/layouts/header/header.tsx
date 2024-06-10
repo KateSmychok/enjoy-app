@@ -11,11 +11,14 @@ import { useApiClient } from '@global/modules/api-client';
 import { UserDto } from '@generated/models';
 import { rowContainerStyle, yCenteredStyle } from '@global/common-styles';
 import profileIcon from '@assets/icons/profile.svg';
+import loginIcon from '@assets/icons/login.svg';
+import logoutIcon from '@assets/icons/logout.svg';
 
 function Header() {
   const { isLoggedIn } = useAppSelector(
     (state: RootState) => state.authReducer,
   );
+  const user = useAppSelector((state: RootState) => state.userReducer);
 
   const client = useApiClient();
   const dispatch = useAppDispatch();
@@ -34,18 +37,23 @@ function Header() {
   return (
     <header css={(theme) => containerStyle(theme)}>
       <div css={wrapperStyle}>
-        <img css={logoStyle} src={logo} />
+        <Link to={'/'}>
+          <img css={logoStyle} src={logo} />
+        </Link>
         {!isLoggedIn ? (
           <Button variant={ButtonType.INVISIBLE} onClick={handleLoginClick}>
             <span>{'Login'}</span>
+            <img src={loginIcon} alt={'Login'} css={iconStyle} />
           </Button>
         ) : (
           <div css={[rowContainerStyle, yCenteredStyle]}>
-            <Link to={'/me'}>
+            <Link to={'/profile'} css={(theme) => [textStyle(theme), yCenteredStyle]}>
               <img src={profileIcon} alt={'Profile'} />
+              <span>{user.name ?? user.email}</span>
             </Link>
             <Button variant={ButtonType.INVISIBLE} onClick={handleLogoutClick}>
               <span>{'Logout'}</span>
+              <img src={logoutIcon} alt={'Logout'} css={iconStyle} />
             </Button>
           </div>
         )}
@@ -56,13 +64,19 @@ function Header() {
 
 const containerStyle = (theme: Theme) => css`
   width: 100%;
-  height: 80px;
+  height: 70px;
   background-color: ${theme.colours.primary};
-  ${theme.textStyles.bodySmall};
   color: ${theme.colours.textWhite};
   margin-bottom: 52px;
   text-decoration: none;
 `;
+
+const textStyle = (theme: Theme) => css`
+  ${theme.textStyles.bodyMiddle};
+  color: ${theme.colours.textWhite};
+  text-decoration: none;
+  padding-right: 24px;
+`
 
 const wrapperStyle = () => css`
   display: flex;
@@ -85,6 +99,10 @@ const wrapperStyle = () => css`
 const logoStyle = () => css`
   object-fit: contain;
   max-width: 120px;
+`;
+
+const iconStyle = () => css`
+  padding-left: 8px;
 `;
 
 export default Header;

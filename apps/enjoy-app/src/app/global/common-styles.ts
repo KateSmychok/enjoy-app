@@ -1,5 +1,9 @@
 import { css, Theme } from '@emotion/react';
 
+export const fullWidthStyle = () => css`
+  width: 100%;
+`;
+
 export const rowContainerStyle = () => css`
   display: flex;
 `;

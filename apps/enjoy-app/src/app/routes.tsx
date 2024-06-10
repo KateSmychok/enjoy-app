@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
-const HomePage = React.lazy(() => import('./pages/home-page/home-page'));
+import HomePage from "./pages/home-page/home-page";
+import ProfilePage from "./pages/profile/profile-page";
 
 export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route element={<div>Page not found</div>} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 };

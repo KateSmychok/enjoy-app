@@ -26,7 +26,7 @@ function AuthForm() {
             onClick={onClose}
             disabled={false}
           >
-            {'Cancel'}
+            {'Close'}
           </Button>
         </div>
       </>

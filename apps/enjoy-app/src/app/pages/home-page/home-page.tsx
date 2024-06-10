@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { css, Theme } from '@emotion/react';
-import { BookDto } from '@generated/models';
 import { withErrorBoundary } from '@global/utils/error-boundary';
 import RetryPanel from '@global/components/retry-panel/retry-panel';
 import { useHomePage } from './use-home-page';
-import TopItemsList from '../../components/top-items-list';
+import TopItemsList from '../../layouts/items-list/top-items-list';
 import {
   columnContainerStyle,
-  rowContainerStyle,
-  spaceBetweenStyle,
+  fullWidthStyle,
+  xCenteredStyle,
   yCenteredStyle,
 } from '@global/common-styles';
 import readingMan from '@assets/pics/main-pic-reading.jpg';
@@ -19,8 +18,9 @@ import AuthForm from '../../layouts/forms/auth-form/auth-form';
 
 function HomePageInner() {
   const {
+    activityType,
     isLoading,
-    relevantBooks,
+    relevantItems,
     page,
     totalPages,
     onSetPage,
@@ -31,7 +31,7 @@ function HomePageInner() {
   } = useHomePage();
   return (
     <div id={'home-page'}>
-      <div css={[rowContainerStyle, spaceBetweenStyle, yCenteredStyle]}>
+      <div css={[columnContainerStyle, xCenteredStyle, containerStyle]}>
         <ul css={(theme) => aboutBlockStyle(theme)}>
           <li>
             <p>
@@ -54,20 +54,26 @@ function HomePageInner() {
             </p>
           </li>
         </ul>
-        <div css={pictureStyle}></div>
       </div>
-      <div css={rowContainerStyle}>
-        {!isLoading && (
-          <div css={columnContainerStyle}>
-            <TopItemsList<BookDto> items={relevantBooks} />
-            <Pagination
-              totalPages={totalPages}
-              selectedPage={page}
-              onSelect={onSetPage}
-            />
-          </div>
-        )}
+      <div
+        css={(theme) => [
+          itemsListTitleStyle(theme),
+          columnContainerStyle,
+          yCenteredStyle,
+        ]}
+      >
+        {'Reading now'}
       </div>
+      {!isLoading && (
+        <div css={[columnContainerStyle, yCenteredStyle, fullWidthStyle]}>
+          <TopItemsList items={relevantItems} activityType={activityType} />
+          <Pagination
+            totalPages={totalPages}
+            selectedPage={page}
+            onSelect={onSetPage}
+          />
+        </div>
+      )}
       {isAuthModalOpened &&
         ReactDOM.createPortal(
           <Modal onClose={onCloseAuthModal}>
@@ -87,31 +93,49 @@ const HomePage = () =>
   );
 
 const containerStyle = () => css`
-  margin-bottom: 44px;
-`;
-
-const pictureStyle = () => css`
-  background: url(${readingMan}) no-repeat;
+  position: relative;
+  background: url(${readingMan}) no-repeat top -100px right 0;
   background-size: contain;
-  width: 70%;
+  width: 100%;
   height: 800px;
-  margin-bottom: 60px;
 
-  @media only screen and (max-width: 1536px) {
-    background-size: auto 100%;
-    height: 400px;
+  @media only screen and (max-width: 1280px) {
+    background-size: 80%;
+    height: 600px;
   }
 
   @media only screen and (max-width: 1024px) {
-    background-size: auto 80%;
-    height: 320px;
-    margin-bottom: 0;
+    background-size: 60%;
+    height: 500px;
+    background-position: top 0 right 0;
+  }
+
+  @media only screen and (max-width: 768px) {
+    background: none;
+    height: 400px;
+  }
+`;
+
+const itemsListTitleStyle = (theme: Theme) => css`
+  width: 540px;
+  margin: 0 auto 60px;
+  ${theme.textStyles.titleL};
+
+  :after {
+    content: '';
+    width: 100%;
+    height: 6px;
+    background-color: ${theme.colours.primary};
+  }
+
+  @media only screen and (max-width: 540px) {
+    width: 100%;
   }
 `;
 
 const aboutBlockStyle = (theme: Theme) => css`
   width: 50%;
-  ${theme.textStyles.titleL};
+  ${theme.textStyles.titleM};
 
   li {
     padding-bottom: 24px;
@@ -119,6 +143,14 @@ const aboutBlockStyle = (theme: Theme) => css`
 
   span {
     color: ${theme.colours.primary};
+  }
+
+  @media only screen and (max-width: 1280px) {
+    ${theme.textStyles.bodyLarge};
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
   }
 `;
 
