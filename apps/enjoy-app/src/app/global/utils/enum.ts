@@ -14,15 +14,3 @@ export enum AuthMode {
   Register = 'Register',
   Login = 'Login',
 }
-
-export enum ActivityType {
-  Reading = 'Reading',
-  Watching = 'Watching',
-  Playing = 'Playing',
-}
-
-export enum StateType {
-  InProgress = 'InProgress',
-  Completed = 'Completed',
-  Planned = 'Planned',
-}

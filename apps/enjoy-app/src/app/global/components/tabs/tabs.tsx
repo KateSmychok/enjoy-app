@@ -1,5 +1,5 @@
 import React from 'react';
-import {css, Theme} from '@emotion/react';
+import { css, Theme } from '@emotion/react';
 
 export interface TabProps<T> {
   name: string;

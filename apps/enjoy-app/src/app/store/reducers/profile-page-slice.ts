@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {ActivityType, StateType} from '@global/utils/enum';
+import { ActivityType, ItemState } from '@generated/models';
 
 export interface Item {
   id: number;
@@ -13,7 +13,7 @@ export interface Item {
 
 interface ProfilePageState {
   selectedActivityType: ActivityType;
-  selectedStateType: StateType;
+  selectedStateType: ItemState;
   relevantItems: Item[];
   page: number;
   totalPages: number;
@@ -22,7 +22,7 @@ interface ProfilePageState {
 
 const initialState: ProfilePageState = {
   selectedActivityType: ActivityType.Reading,
-  selectedStateType: StateType.InProgress,
+  selectedStateType: ItemState.InProgress,
   relevantItems: [],
   page: 1,
   totalPages: 1,
@@ -33,10 +33,13 @@ export const profilePageSlice = createSlice({
   name: 'homePage',
   initialState,
   reducers: {
-    setActivityType(state: ProfilePageState, action: PayloadAction<ActivityType>) {
+    setActivityType(
+      state: ProfilePageState,
+      action: PayloadAction<ActivityType>,
+    ) {
       state.selectedActivityType = action.payload;
     },
-    setStateType(state: ProfilePageState, action: PayloadAction<StateType>) {
+    setStateType(state: ProfilePageState, action: PayloadAction<ItemState>) {
       state.selectedStateType = action.payload;
     },
     setRelevantItems(state: ProfilePageState, action: PayloadAction<Item[]>) {

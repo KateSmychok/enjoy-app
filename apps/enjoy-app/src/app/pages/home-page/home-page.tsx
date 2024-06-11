@@ -4,7 +4,7 @@ import { css, Theme } from '@emotion/react';
 import { withErrorBoundary } from '@global/utils/error-boundary';
 import RetryPanel from '@global/components/retry-panel/retry-panel';
 import { useHomePage } from './use-home-page';
-import TopItemsList from '../../layouts/items-list/top-items-list';
+import TopItemsList from '../../layouts/top-items-list/top-items-list';
 import {
   columnContainerStyle,
   fullWidthStyle,
@@ -28,6 +28,7 @@ function HomePageInner() {
     isLoggedIn,
     isAuthModalOpened,
     onCloseAuthModal,
+    onOpenAuthModal,
   } = useHomePage();
   return (
     <div id={'home-page'}>
@@ -66,7 +67,11 @@ function HomePageInner() {
       </div>
       {!isLoading && (
         <div css={[columnContainerStyle, yCenteredStyle, fullWidthStyle]}>
-          <TopItemsList items={relevantItems} activityType={activityType} />
+          <TopItemsList
+            items={relevantItems}
+            activityType={activityType}
+            onOpenAuthModal={onOpenAuthModal}
+          />
           <Pagination
             totalPages={totalPages}
             selectedPage={page}

@@ -19,7 +19,8 @@
       "@global/*": ["apps/enjoy-app/src/app/global/*"],
       "@store/*": ["apps/enjoy-app/src/app/store/*"],
       "@assets/*": ["apps/enjoy-app/src/assets/*"],
-      "@generated/*": ["apps/enjoy-api/src/generated/*"]
+      "@generated/*": ["apps/enjoy-api/src/generated/*"],
+      "@enum": ["apps/enjoy-api/src/utils/enum"]
     }
   },
   "exclude": ["node_modules", "tmp"],

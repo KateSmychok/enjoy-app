@@ -39,7 +39,7 @@ import {
   operationServerMap,
 } from '../base';
 // @ts-ignore
-import { ProcessBookDto } from '../models';
+import { ChangeActivityStateDto } from '../models';
 // @ts-ignore
 import { UserDto } from '../models';
 /**
@@ -50,6 +50,60 @@ export const ProfileApiAxiosParamCreator = function (
   configuration?: Configuration,
 ) {
   return {
+    /**
+     *
+     * @summary
+     * @param {ChangeActivityStateDto} changeActivityStateDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    changeActivityState: async (
+      changeActivityStateDto: ChangeActivityStateDto,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'changeActivityStateDto' is not null or undefined
+      assertParamExists(
+        'changeActivityState',
+        'changeActivityStateDto',
+        changeActivityStateDto,
+      );
+      const localVarPath = `/profile/state`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'PATCH',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        changeActivityStateDto,
+        localVarRequestOptions,
+        configuration,
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
     /**
      *
      * @summary
@@ -89,56 +143,6 @@ export const ProfileApiAxiosParamCreator = function (
         options: localVarRequestOptions,
       };
     },
-    /**
-     *
-     * @summary
-     * @param {ProcessBookDto} processBookDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    processBook: async (
-      processBookDto: ProcessBookDto,
-      options: RawAxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
-      // verify required parameter 'processBookDto' is not null or undefined
-      assertParamExists('processBook', 'processBookDto', processBookDto);
-      const localVarPath = `/profile/books`;
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-
-      const localVarRequestOptions = {
-        method: 'PATCH',
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      localVarHeaderParameter['Content-Type'] = 'application/json';
-
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-      localVarRequestOptions.data = serializeDataIfNeeded(
-        processBookDto,
-        localVarRequestOptions,
-        configuration,
-      );
-
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
   };
 };
 
@@ -149,6 +153,37 @@ export const ProfileApiAxiosParamCreator = function (
 export const ProfileApiFp = function (configuration?: Configuration) {
   const localVarAxiosParamCreator = ProfileApiAxiosParamCreator(configuration);
   return {
+    /**
+     *
+     * @summary
+     * @param {ChangeActivityStateDto} changeActivityStateDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async changeActivityState(
+      changeActivityStateDto: ChangeActivityStateDto,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.changeActivityState(
+          changeActivityStateDto,
+          options,
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['ProfileApi.changeActivityState']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
     /**
      *
      * @summary
@@ -174,36 +209,6 @@ export const ProfileApiFp = function (configuration?: Configuration) {
           configuration,
         )(axios, localVarOperationServerBasePath || basePath);
     },
-    /**
-     *
-     * @summary
-     * @param {ProcessBookDto} processBookDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async processBook(
-      processBookDto: ProcessBookDto,
-      options?: RawAxiosRequestConfig,
-    ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
-    > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.processBook(
-        processBookDto,
-        options,
-      );
-      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-      const localVarOperationServerBasePath =
-        operationServerMap['ProfileApi.processBook']?.[
-          localVarOperationServerIndex
-        ]?.url;
-      return (axios, basePath) =>
-        createRequestFunction(
-          localVarAxiosArgs,
-          globalAxios,
-          BASE_PATH,
-          configuration,
-        )(axios, localVarOperationServerBasePath || basePath);
-    },
   };
 };
 
@@ -221,27 +226,27 @@ export const ProfileApiFactory = function (
     /**
      *
      * @summary
+     * @param {ChangeActivityStateDto} changeActivityStateDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    changeActivityState(
+      changeActivityStateDto: ChangeActivityStateDto,
+      options?: any,
+    ): AxiosPromise<void> {
+      return localVarFp
+        .changeActivityState(changeActivityStateDto, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getUser(options?: any): AxiosPromise<UserDto> {
       return localVarFp
         .getUser(options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
-     *
-     * @summary
-     * @param {ProcessBookDto} processBookDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    processBook(
-      processBookDto: ProcessBookDto,
-      options?: any,
-    ): AxiosPromise<void> {
-      return localVarFp
-        .processBook(processBookDto, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -256,24 +261,24 @@ export interface ProfileApiInterface {
   /**
    *
    * @summary
+   * @param {ChangeActivityStateDto} changeActivityStateDto
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ProfileApiInterface
+   */
+  changeActivityState(
+    changeActivityStateDto: ChangeActivityStateDto,
+    options?: RawAxiosRequestConfig,
+  ): AxiosPromise<void>;
+
+  /**
+   *
+   * @summary
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ProfileApiInterface
    */
   getUser(options?: RawAxiosRequestConfig): AxiosPromise<UserDto>;
-
-  /**
-   *
-   * @summary
-   * @param {ProcessBookDto} processBookDto
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof ProfileApiInterface
-   */
-  processBook(
-    processBookDto: ProcessBookDto,
-    options?: RawAxiosRequestConfig,
-  ): AxiosPromise<void>;
 }
 
 /**
@@ -286,6 +291,23 @@ export class ProfileApi extends BaseAPI implements ProfileApiInterface {
   /**
    *
    * @summary
+   * @param {ChangeActivityStateDto} changeActivityStateDto
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ProfileApi
+   */
+  public changeActivityState(
+    changeActivityStateDto: ChangeActivityStateDto,
+    options?: RawAxiosRequestConfig,
+  ) {
+    return ProfileApiFp(this.configuration)
+      .changeActivityState(changeActivityStateDto, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ProfileApi
@@ -293,23 +315,6 @@ export class ProfileApi extends BaseAPI implements ProfileApiInterface {
   public getUser(options?: RawAxiosRequestConfig) {
     return ProfileApiFp(this.configuration)
       .getUser(options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
-  /**
-   *
-   * @summary
-   * @param {ProcessBookDto} processBookDto
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof ProfileApi
-   */
-  public processBook(
-    processBookDto: ProcessBookDto,
-    options?: RawAxiosRequestConfig,
-  ) {
-    return ProfileApiFp(this.configuration)
-      .processBook(processBookDto, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

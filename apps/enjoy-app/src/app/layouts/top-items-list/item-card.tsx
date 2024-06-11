@@ -1,69 +1,97 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { css, Theme } from '@emotion/react';
 import {
   columnContainerStyle,
   rowContainerStyle,
   yCenteredStyle,
 } from '@global/common-styles';
-import { ActivityType, ButtonType } from '@global/utils/enum';
+import { ButtonType } from '@global/utils/enum';
 import { Button } from '@global/components/buttons';
 import { useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
-import { getItemType, getUsersType } from './utils';
+import { getKey, getUsersType, mapDtoToId, UsersActivityState } from './utils';
 import { Item } from '@store/reducers/home-page-slice';
+import { ActivityType, ItemState, UserDto } from '@generated/models';
 
 interface Props {
   data: Item;
   index: number;
   activityType: ActivityType;
+  onChangeItemState: (id: number, itemState: ItemState) => void;
+  onOpenAuthModal: () => void;
 }
 
-function ItemCard({ data, index, activityType }: Props) {
-  const user = useAppSelector((state: RootState) => state.userReducer);
-  const itemType = getItemType(activityType);
-  const usersType = getUsersType(activityType);
+function ItemCard({
+  data,
+  index,
+  activityType,
+  onChangeItemState,
+  onOpenAuthModal,
+}: Props) {
+  const user: UserDto = useAppSelector((state: RootState) => state.userReducer);
+  const itemId = data.id;
 
-  const inProgress = user[`${itemType}InProgress`].map((i) => i.id);
-  const completed = user[`${itemType}Completed`].map((i) => i.id);
-  const planned = user[`${itemType}Planned`].map((i) => i.id);
+  const usersActivityState: UsersActivityState = useMemo(() => {
+    return {
+      inProgress: user.id
+        ? mapDtoToId(user[getKey(activityType, ItemState.InProgress)])
+        : [],
+      completed: user.id
+        ? mapDtoToId(user[getKey(activityType, ItemState.Completed)])
+        : [],
+      planned: user.id
+        ? mapDtoToId(user[getKey(activityType, ItemState.Planned)])
+        : [],
+    };
+  }, [user]);
+
+  const onBtnClick = (itemState: ItemState) => {
+    if (user.id) {
+      onChangeItemState(itemId, itemState);
+    } else {
+      onOpenAuthModal();
+    }
+  };
 
   return (
     <li css={[rowContainerStyle, containerStyle, yCenteredStyle]}>
       <div css={(theme) => indexStyle(theme)}>{index + 1}</div>
       <div css={[columnContainerStyle, dataStyle]}>
         <p css={bookTitleStyle}>{`${data.author} ${data.title}`}</p>
-        <p css={readersCountStyle}>{`${data.inProgress} ${usersType}`}</p>
+        <p
+          css={readersCountStyle}
+        >{`${data.inProgress} ${getUsersType(activityType)}`}</p>
       </div>
       <div css={[columnContainerStyle, buttonsContainerStyle]}>
         <Button
           variant={
-            completed.includes(data.id)
+            usersActivityState.completed.includes(itemId)
               ? ButtonType.PRIMARY
               : ButtonType.PRIMARY_OUTLINED
           }
-          onClick={() => null}
+          onClick={() => onBtnClick(ItemState.Completed)}
           disabled={false}
         >
           {'Done!'}
         </Button>
         <Button
           variant={
-            inProgress.includes(data.id)
+            usersActivityState.inProgress.includes(itemId)
               ? ButtonType.PRIMARY
               : ButtonType.PRIMARY_OUTLINED
           }
-          onClick={() => null}
+          onClick={() => onBtnClick(ItemState.InProgress)}
           disabled={false}
         >
           {'Me too'}
         </Button>
         <Button
           variant={
-            planned.includes(data.id)
+            usersActivityState.planned.includes(itemId)
               ? ButtonType.PRIMARY
               : ButtonType.PRIMARY_OUTLINED
           }
-          onClick={() => null}
+          onClick={() => onBtnClick(ItemState.Planned)}
           disabled={false}
         >
           {'For later'}

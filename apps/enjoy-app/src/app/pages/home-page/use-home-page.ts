@@ -1,12 +1,13 @@
 import { useEffect, useMemo } from 'react';
+import { debounce, slice } from 'lodash';
 import { useApiClient } from '@global/modules/api-client';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { booksSliceActions } from '@store/reducers/books-slice';
 import { authSliceActions } from '@store/reducers/auth-slice';
 import { RootState } from '@store/store';
-import { debounce, slice } from 'lodash';
-import { ActivityType, AuthMode } from '@global/utils/enum';
+import { AuthMode } from '@global/utils/enum';
 import { homePageSliceActions, Item } from '@store/reducers/home-page-slice';
+import { ActivityType } from '@generated/models';
 
 interface UseHomePage {
   activityType: ActivityType;
@@ -20,6 +21,7 @@ interface UseHomePage {
   isLoggedIn: boolean;
   isAuthModalOpened: boolean;
   onCloseAuthModal: () => void;
+  onOpenAuthModal: () => void;
 }
 
 export const useHomePage = (): UseHomePage => {
@@ -39,6 +41,7 @@ export const useHomePage = (): UseHomePage => {
   } = useAppSelector((state: RootState) => state.homePageReducer);
   const { allBooks } = useAppSelector((state: RootState) => state.booksReducer);
 
+  // FIXME - games, series
   const items = useMemo(() => {
     switch (activityType) {
       case ActivityType.Reading:
@@ -57,6 +60,10 @@ export const useHomePage = (): UseHomePage => {
     dispatch(authSliceActions.closeAuthModal());
   };
 
+  const handleOpenAuthModal = () => {
+    dispatch(authSliceActions.openAuthModal());
+  };
+
   const getTopBooks = async () => {
     const { data } = await client.books.getAllBooks();
     const skip = (page - 1) * rowsPerPage;
@@ -73,12 +80,8 @@ export const useHomePage = (): UseHomePage => {
   };
 
   const debouncedInit = debounce(() => {
-    return init();
+    return getTopBooks();
   }, 200);
-
-  const init = async () => {
-    getTopBooks();
-  };
 
   useEffect(() => {
     debouncedInit();
@@ -96,5 +99,6 @@ export const useHomePage = (): UseHomePage => {
     isLoggedIn,
     isAuthModalOpened,
     onCloseAuthModal: handleCloseAuthModal,
+    onOpenAuthModal: handleOpenAuthModal,
   };
 };

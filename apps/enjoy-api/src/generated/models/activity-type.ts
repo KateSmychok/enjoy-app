@@ -13,13 +13,13 @@
  */
 
 /**
- * book type
+ * activity type
  * @export
  * @enum {string}
  */
 
-export enum BookType {
-  InProgress = 'in-progress',
-  Completed = 'completed',
-  Planned = 'planned',
+export enum ActivityType {
+  Reading = 'Reading',
+  Watching = 'Watching',
+  Playing = 'Playing',
 }

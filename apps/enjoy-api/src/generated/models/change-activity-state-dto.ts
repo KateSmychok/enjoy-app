@@ -14,33 +14,33 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BookAction } from './book-action';
+import { ActivityType } from './activity-type';
 // May contain unused imports in some cases
 // @ts-ignore
-import { BookType } from './book-type';
+import { ItemState } from './item-state';
 
 /**
  *
  * @export
- * @interface ProcessBookDto
+ * @interface ChangeActivityStateDto
  */
-export interface ProcessBookDto {
+export interface ChangeActivityStateDto {
   /**
-   * bookId
+   * id
    * @type {number}
-   * @memberof ProcessBookDto
+   * @memberof ChangeActivityStateDto
    */
-  bookId: number;
+  id: number;
   /**
    *
-   * @type {BookType}
-   * @memberof ProcessBookDto
+   * @type {ItemState}
+   * @memberof ChangeActivityStateDto
    */
-  type: BookType;
+  itemState: ItemState;
   /**
    *
-   * @type {BookAction}
-   * @memberof ProcessBookDto
+   * @type {ActivityType}
+   * @memberof ChangeActivityStateDto
    */
-  action: BookAction;
+  activityType: ActivityType;
 }

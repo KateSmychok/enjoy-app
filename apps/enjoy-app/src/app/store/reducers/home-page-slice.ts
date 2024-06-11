@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ActivityType } from '@global/utils/enum';
+import { ActivityType } from '@generated/models';
 
 export interface Item {
   id: number;
   author?: string;
   title: string;
   rating?: number;
+  description?: string;
   inProgress?: number;
   completed?: number;
   planned?: number;

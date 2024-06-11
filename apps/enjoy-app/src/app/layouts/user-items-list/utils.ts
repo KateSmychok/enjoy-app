@@ -1,6 +1,6 @@
-import { ActivityType } from '@global/utils/enum';
+import { ActivityType } from '@generated/models';
 
-export const getItemType = (type: ActivityType): string => {
+export const getPrefix = (type: ActivityType): string => {
   switch (type) {
     case ActivityType.Reading:
       return 'books';

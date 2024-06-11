@@ -1,10 +1,11 @@
-export enum BookAction {
-  Add = 'add',
-  Remove = 'remove',
+export enum ItemState {
+  InProgress = 'InProgress',
+  Completed = 'Completed',
+  Planned = 'Planned',
 }
 
-export enum BookType {
-  InProgress = 'in-progress',
-  Completed = 'completed',
-  Planned = 'planned',
+export enum ActivityType {
+  Reading = 'Reading',
+  Watching = 'Watching',
+  Playing = 'Playing',
 }

@@ -1,6 +1,8 @@
 import { Collection, Entity, ManyToMany, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
 import { Book } from './Book';
+import { Game } from './Game';
+import { Series } from './Series';
 
 export interface UserInput {
   email: string;
@@ -70,4 +72,70 @@ export class User extends BaseEntity {
     hidden: true,
   })
   booksPlanned = new Collection<Book>(this);
+
+  @ManyToMany({
+    entity: () => Game,
+    inversedBy: (g) => g.gamersInProgress,
+    owner: true,
+    pivotTable: 'users_games_in_progress',
+    joinColumn: 'user_id',
+    inverseJoinColumn: 'game_id',
+    hidden: true,
+  })
+  gamesInProgress = new Collection<Game>(this);
+
+  @ManyToMany({
+    entity: () => Game,
+    inversedBy: (g) => g.gamersCompleted,
+    owner: true,
+    pivotTable: 'users_games_completed',
+    joinColumn: 'user_id',
+    inverseJoinColumn: 'game_id',
+    hidden: true,
+  })
+  gamesCompleted = new Collection<Game>(this);
+
+  @ManyToMany({
+    entity: () => Game,
+    inversedBy: (g) => g.gamersPlanned,
+    owner: true,
+    pivotTable: 'users_games_planned',
+    joinColumn: 'user_id',
+    inverseJoinColumn: 'game_id',
+    hidden: true,
+  })
+  gamesPlanned = new Collection<Game>(this);
+
+  @ManyToMany({
+    entity: () => Series,
+    inversedBy: (s) => s.watchersInProgress,
+    owner: true,
+    pivotTable: 'users_series_in_progress',
+    joinColumn: 'user_id',
+    inverseJoinColumn: 'series_id',
+    hidden: true,
+  })
+  seriesInProgress = new Collection<Series>(this);
+
+  @ManyToMany({
+    entity: () => Series,
+    inversedBy: (s) => s.watchersCompleted,
+    owner: true,
+    pivotTable: 'users_series_completed',
+    joinColumn: 'user_id',
+    inverseJoinColumn: 'series_id',
+    hidden: true,
+  })
+  seriesCompleted = new Collection<Series>(this);
+
+  @ManyToMany({
+    entity: () => Series,
+    inversedBy: (s) => s.watchersPlanned,
+    owner: true,
+    pivotTable: 'users_series_planned',
+    joinColumn: 'user_id',
+    inverseJoinColumn: 'series_id',
+    hidden: true,
+  })
+  seriesPlanned = new Collection<Series>(this);
 }

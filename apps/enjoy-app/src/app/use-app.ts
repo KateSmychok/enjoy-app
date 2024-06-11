@@ -1,10 +1,10 @@
-import {debounce} from "lodash";
-import {useEffect} from "react";
-import {useApiClient} from "@global/modules/api-client";
-import {useAppDispatch} from "@store/hooks";
-import {authSliceActions} from "@store/reducers/auth-slice";
-import {userSliceActions} from "@store/reducers/user-slice";
-import {UserDto} from "@generated/models";
+import { debounce } from 'lodash';
+import { useEffect } from 'react';
+import { useApiClient } from '@global/modules/api-client';
+import { useAppDispatch } from '@store/hooks';
+import { authSliceActions } from '@store/reducers/auth-slice';
+import { userSliceActions } from '@store/reducers/user-slice';
+import { UserDto } from '@generated/models';
 
 export const useApp = () => {
   const client = useApiClient();
@@ -28,4 +28,4 @@ export const useApp = () => {
   useEffect(() => {
     debouncedInit();
   }, []);
-}
+};

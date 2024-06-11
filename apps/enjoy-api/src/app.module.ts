@@ -8,6 +8,8 @@ import { ProfileModule } from './profile/profile.module';
 import { BookRatingModule } from './book-rating/book-rating.module';
 import { ConfigModule } from '@nestjs/config';
 import { BaseEntity } from './entities/base.entity';
+import { GamesModule } from './games/games.module';
+import { GamesRatingModule } from './game-rating/games-rating.module';
 
 @Module({
   controllers: [],
@@ -31,6 +33,8 @@ import { BaseEntity } from './entities/base.entity';
     BooksModule,
     ProfileModule,
     BookRatingModule,
+    GamesModule,
+    GamesRatingModule,
   ],
   exports: [],
 })

@@ -13,12 +13,13 @@
  */
 
 /**
- * add or remove
+ * item state
  * @export
  * @enum {string}
  */
 
-export enum BookAction {
-  Add = 'add',
-  Remove = 'remove',
+export enum ItemState {
+  InProgress = 'InProgress',
+  Completed = 'Completed',
+  Planned = 'Planned',
 }

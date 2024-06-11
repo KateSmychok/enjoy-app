@@ -47,7 +47,10 @@ function Header() {
           </Button>
         ) : (
           <div css={[rowContainerStyle, yCenteredStyle]}>
-            <Link to={'/profile'} css={(theme) => [textStyle(theme), yCenteredStyle]}>
+            <Link
+              to={'/profile'}
+              css={(theme) => [textStyle(theme), yCenteredStyle]}
+            >
               <img src={profileIcon} alt={'Profile'} />
               <span>{user.name ?? user.email}</span>
             </Link>
@@ -76,7 +79,7 @@ const textStyle = (theme: Theme) => css`
   color: ${theme.colours.textWhite};
   text-decoration: none;
   padding-right: 24px;
-`
+`;
 
 const wrapperStyle = () => css`
   display: flex;

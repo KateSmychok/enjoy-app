@@ -1,5 +1,5 @@
-import {TabProps} from "@global/components/tabs/tabs";
-import {ActivityType, StateType} from "@global/utils/enum";
+import { TabProps } from '@global/components/tabs/tabs';
+import { ActivityType, ItemState } from '@generated/models';
 
 export const activityTabs: TabProps<ActivityType>[] = [
   {
@@ -13,20 +13,20 @@ export const activityTabs: TabProps<ActivityType>[] = [
   {
     name: 'Games',
     type: ActivityType.Playing,
-  }
-]
+  },
+];
 
-export const stateTabs: TabProps<StateType>[] = [
+export const stateTabs: TabProps<ItemState>[] = [
   {
     name: 'Completed',
-    type: StateType.Completed,
+    type: ItemState.Completed,
   },
   {
     name: 'In progress',
-    type: StateType.InProgress,
+    type: ItemState.InProgress,
   },
   {
     name: 'Planned',
-    type: StateType.Planned,
-  }
-]
+    type: ItemState.Planned,
+  },
+];

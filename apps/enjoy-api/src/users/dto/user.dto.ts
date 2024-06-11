@@ -22,4 +22,13 @@ export class UserDto {
 
   @ApiProperty({ type: [BookDto], isArray: true })
   booksPlanned: BookDto[];
+
+  @ApiProperty({ type: [BookDto], isArray: true })
+  gamesInProgress: BookDto[];
+
+  @ApiProperty({ type: [BookDto], isArray: true })
+  gamesCompleted: BookDto[];
+
+  @ApiProperty({ type: [BookDto], isArray: true })
+  gamesPlanned: BookDto[];
 }
