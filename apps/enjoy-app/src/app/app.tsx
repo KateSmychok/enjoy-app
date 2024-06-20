@@ -3,7 +3,7 @@ import { ErrorBoundary } from '@global/utils/error-boundary';
 import { AppRoutes } from './routes';
 import Header from './layouts/header/header';
 import { useApp } from './use-app';
-import RetryPanel from '@global/components/retry-panel/retry-panel';
+import RetryPanel from './layouts/retry-panel/retry-panel';
 
 export const App = () => {
   useApp();

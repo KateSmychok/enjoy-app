@@ -7,8 +7,8 @@ export interface RatingInput {
   value: number;
 }
 
-@Entity({ tableName: 'book_rating' })
-export class BookRating extends BaseEntity {
+@Entity({ tableName: 'books_rating' })
+export class BooksRating extends BaseEntity {
   constructor(input: RatingInput) {
     super();
 

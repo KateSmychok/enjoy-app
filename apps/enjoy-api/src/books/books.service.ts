@@ -4,7 +4,7 @@ import { EntityManager, EntityRepository } from '@mikro-orm/mysql';
 import { Book } from '../entities/Book';
 import { CreateBookDto } from './dto/create-book.dto';
 import { BooksMapper } from './book.mapper';
-import { BookRating } from '../entities/BookRating';
+import { BooksRating } from '../entities/BooksRating';
 import { GetBooksQuery } from './queries/get-books.query';
 import { slice } from 'lodash';
 
@@ -13,8 +13,8 @@ export class BooksService {
   constructor(
     @InjectRepository(Book)
     private readonly booksRepository: EntityRepository<Book>,
-    @InjectRepository(BookRating)
-    private readonly ratingRepository: EntityRepository<BookRating>,
+    @InjectRepository(BooksRating)
+    private readonly ratingRepository: EntityRepository<BooksRating>,
     private readonly getBooksQuery: GetBooksQuery,
     private readonly booksMapper: BooksMapper,
     private em: EntityManager,

@@ -1,13 +1,11 @@
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
-import {
-  Item,
-  profilePageSliceActions,
-} from '@store/reducers/profile-page-slice';
+import { profilePageSliceActions } from '@store/reducers/profile-page-slice';
 import { useEffect } from 'react';
 import { slice } from 'lodash';
 import { getActivityType } from '../../layouts/top-items-list/utils';
 import { ActivityType, ItemState } from '@generated/models';
+import { Item } from '@global/interfaces';
 
 export const useProfilePage = () => {
   const dispatch = useAppDispatch();

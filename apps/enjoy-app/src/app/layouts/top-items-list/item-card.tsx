@@ -10,8 +10,8 @@ import { Button } from '@global/components/buttons';
 import { useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import { getKey, getUsersType, mapDtoToId, UsersActivityState } from './utils';
-import { Item } from '@store/reducers/home-page-slice';
 import { ActivityType, ItemState, UserDto } from '@generated/models';
+import { Item } from '@global/interfaces';
 
 interface Props {
   data: Item;
@@ -32,17 +32,21 @@ function ItemCard({
   const itemId = data.id;
 
   const usersActivityState: UsersActivityState = useMemo(() => {
-    return {
-      inProgress: user.id
-        ? mapDtoToId(user[getKey(activityType, ItemState.InProgress)])
-        : [],
-      completed: user.id
-        ? mapDtoToId(user[getKey(activityType, ItemState.Completed)])
-        : [],
-      planned: user.id
-        ? mapDtoToId(user[getKey(activityType, ItemState.Planned)])
-        : [],
-    };
+    return user.id
+      ? {
+          inProgress: mapDtoToId(
+            user[getKey(activityType, ItemState.InProgress)],
+          ),
+          completed: mapDtoToId(
+            user[getKey(activityType, ItemState.Completed)],
+          ),
+          planned: mapDtoToId(user[getKey(activityType, ItemState.Planned)]),
+        }
+      : {
+          inProgress: [],
+          completed: [],
+          planned: [],
+        };
   }, [user]);
 
   const onBtnClick = (itemState: ItemState) => {

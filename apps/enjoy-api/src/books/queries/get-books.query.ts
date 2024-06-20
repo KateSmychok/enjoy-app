@@ -38,7 +38,7 @@ export class GetBooksQuery {
         qb.on('b.id', 'c.book_id'),
       )
       .leftJoin('users_books_planned as p', (qb) => qb.on('b.id', 'p.book_id'))
-      .leftJoin('book_rating as r', (qb) => qb.on('b.id', 'r.book_id'))
+      .leftJoin('books_rating as r', (qb) => qb.on('b.id', 'r.book_id'))
       .orderBy('inProgress', 'desc')
       .groupBy('b.id');
   }

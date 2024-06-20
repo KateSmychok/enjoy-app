@@ -1,15 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ActivityType, ItemState } from '@generated/models';
-
-export interface Item {
-  id: number;
-  author?: string;
-  title: string;
-  rating?: number;
-  inProgress?: number;
-  completed?: number;
-  planned?: number;
-}
+import { Item } from '@global/interfaces';
 
 interface ProfilePageState {
   selectedActivityType: ActivityType;

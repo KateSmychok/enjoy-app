@@ -5,7 +5,6 @@ import {
   fullWidthStyle,
   yCenteredStyle,
 } from '@global/common-styles';
-import { Item } from '@store/reducers/home-page-slice';
 import {
   ActivityType,
   ChangeActivityStateDto,
@@ -14,6 +13,7 @@ import {
 import { useApiClient } from '@global/modules/api-client';
 import { useAppDispatch } from '@store/hooks';
 import { userSliceActions } from '@store/reducers/user-slice';
+import { Item } from '@global/interfaces';
 
 interface Props {
   items: Item[];

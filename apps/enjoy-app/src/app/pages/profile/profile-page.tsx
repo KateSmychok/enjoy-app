@@ -1,5 +1,3 @@
-import { withErrorBoundary } from '@global/utils/error-boundary';
-import RetryPanel from '@global/components/retry-panel/retry-panel';
 import React from 'react';
 import Tabs from '@global/components/tabs/tabs';
 import { useProfilePage } from './use-profile-page';
@@ -9,9 +7,11 @@ import {
   yCenteredStyle,
 } from '@global/common-styles';
 import { Pagination } from '@global/components/pagination/pagination';
-import { activityTabs, stateTabs } from './constants';
+import { activityTabs, stateTabs } from '@global/constants';
 import { ActivityType, ItemState } from '@generated/models';
 import UserItemsList from '../../layouts/user-items-list/user-items-list';
+import { withErrorBoundary } from '@global/utils/error-boundary';
+import RetryPanel from '../../layouts/retry-panel/retry-panel';
 
 function ProfilePageInner() {
   const {

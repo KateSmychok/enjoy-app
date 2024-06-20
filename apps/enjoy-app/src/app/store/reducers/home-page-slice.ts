@@ -1,19 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ActivityType } from '@generated/models';
-
-export interface Item {
-  id: number;
-  author?: string;
-  title: string;
-  rating?: number;
-  description?: string;
-  inProgress?: number;
-  completed?: number;
-  planned?: number;
-}
+import { Item } from '@global/interfaces';
 
 interface HomePageState {
-  activityType: ActivityType;
+  selectedActivityType: ActivityType;
   relevantItems: Item[];
   isLoading: boolean;
   page: number;
@@ -22,7 +12,7 @@ interface HomePageState {
 }
 
 const initialState: HomePageState = {
-  activityType: ActivityType.Reading,
+  selectedActivityType: ActivityType.Reading,
   relevantItems: [],
   isLoading: true,
   page: 1,
@@ -35,7 +25,7 @@ export const homePageSlice = createSlice({
   initialState,
   reducers: {
     setActivityType(state: HomePageState, action: PayloadAction<ActivityType>) {
-      state.activityType = action.payload;
+      state.selectedActivityType = action.payload;
     },
     setRelevantItems(state: HomePageState, action: PayloadAction<Item[]>) {
       state.relevantItems = action.payload;

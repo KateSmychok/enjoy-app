@@ -5,13 +5,13 @@ import {
   fullWidthStyle,
   yCenteredStyle,
 } from '@global/common-styles';
-import { Item } from '@store/reducers/home-page-slice';
 import {
   ActivityType,
   ChangeActivityStateDto,
   ItemState,
 } from '@generated/models';
 import { useApiClient } from '@global/modules/api-client';
+import { Item } from '@global/interfaces';
 
 interface Props {
   items: Item[];

@@ -1,27 +1,28 @@
 import { useEffect, useMemo } from 'react';
-import { debounce, slice } from 'lodash';
+import {debounce, slice} from 'lodash';
 import { useApiClient } from '@global/modules/api-client';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { homePageSliceActions } from '@store/reducers/home-page-slice';
 import { booksSliceActions } from '@store/reducers/books-slice';
 import { authSliceActions } from '@store/reducers/auth-slice';
 import { RootState } from '@store/store';
 import { AuthMode } from '@global/utils/enum';
-import { homePageSliceActions, Item } from '@store/reducers/home-page-slice';
 import { ActivityType } from '@generated/models';
+import { Item } from '@global/interfaces';
 
 interface UseHomePage {
-  activityType: ActivityType;
+  selectedActivityType: ActivityType;
   isLoading: boolean;
   relevantItems: Item[];
   page: number;
   totalPages: number;
-  onSetPage: (v: number) => void;
-
   mode: AuthMode;
   isLoggedIn: boolean;
   isAuthModalOpened: boolean;
   onCloseAuthModal: () => void;
   onOpenAuthModal: () => void;
+  onSetActivityType: (tab: ActivityType) => void;
+  onSetPage: (v: number) => void;
 }
 
 export const useHomePage = (): UseHomePage => {
@@ -32,7 +33,7 @@ export const useHomePage = (): UseHomePage => {
     (state: RootState) => state.authReducer,
   );
   const {
-    activityType,
+    selectedActivityType,
     relevantItems,
     isLoading,
     page,
@@ -43,11 +44,11 @@ export const useHomePage = (): UseHomePage => {
 
   // FIXME - games, series
   const items = useMemo(() => {
-    switch (activityType) {
+    switch (selectedActivityType) {
       case ActivityType.Reading:
         return allBooks;
     }
-  }, [activityType]);
+  }, [selectedActivityType]);
 
   const handleSetPage = (v: number) => {
     const skip = (v - 1) * rowsPerPage;
@@ -64,7 +65,11 @@ export const useHomePage = (): UseHomePage => {
     dispatch(authSliceActions.openAuthModal());
   };
 
-  const getTopBooks = async () => {
+  const handleSetActivityType = (type: ActivityType) => {
+    dispatch(homePageSliceActions.setActivityType(type));
+  };
+
+  const getTopItems = async () => {
     const { data } = await client.books.getAllBooks();
     const skip = (page - 1) * rowsPerPage;
     const limit = skip + rowsPerPage;
@@ -80,25 +85,25 @@ export const useHomePage = (): UseHomePage => {
   };
 
   const debouncedInit = debounce(() => {
-    return getTopBooks();
+    return getTopItems();
   }, 200);
 
   useEffect(() => {
     debouncedInit();
   }, []);
 
-  return {
-    activityType,
+  return <UseHomePage>{
+    selectedActivityType,
     isLoading,
     relevantItems,
     page,
     totalPages,
-    onSetPage: (v: number) => handleSetPage(v),
-
     mode,
     isLoggedIn,
     isAuthModalOpened,
     onCloseAuthModal: handleCloseAuthModal,
     onOpenAuthModal: handleOpenAuthModal,
+    onSetActivityType: handleSetActivityType,
+    onSetPage: (v: number) => handleSetPage(v),
   };
 };

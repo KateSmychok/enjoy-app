@@ -10,8 +10,8 @@ import { Button } from '@global/components/buttons';
 import { useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import { getPrefix, getUsersType } from './utils';
-import { Item } from '@store/reducers/home-page-slice';
 import { ActivityType, ItemState } from '@generated/models';
+import { Item } from '@global/interfaces';
 
 interface Props {
   data: Item;

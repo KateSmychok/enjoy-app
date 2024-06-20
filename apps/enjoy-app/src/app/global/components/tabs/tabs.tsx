@@ -57,6 +57,7 @@ const textStyle = (theme: Theme) => css`
 
 const itemActiveStyle = (theme: Theme) => css`
   border-bottom: 3px solid ${theme.colours.primary};
+  transform: scale(1.3);
 `;
 
 export default Tabs;

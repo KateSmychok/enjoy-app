@@ -5,7 +5,7 @@ import { MySqlDriver } from '@mikro-orm/mysql';
 import { AuthModule } from './auth/auth.module';
 import { BooksModule } from './books/books.module';
 import { ProfileModule } from './profile/profile.module';
-import { BookRatingModule } from './book-rating/book-rating.module';
+import { BooksRatingModule } from './books-rating/books-rating.module';
 import { ConfigModule } from '@nestjs/config';
 import { BaseEntity } from './entities/base.entity';
 import { GamesModule } from './games/games.module';
@@ -32,7 +32,7 @@ import { GamesRatingModule } from './game-rating/games-rating.module';
     AuthModule,
     BooksModule,
     ProfileModule,
-    BookRatingModule,
+    BooksRatingModule,
     GamesModule,
     GamesRatingModule,
   ],

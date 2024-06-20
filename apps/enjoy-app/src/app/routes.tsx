@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './pages/home-page/home-page';
+import HomePage from './pages/home/home-page';
 import ProfilePage from './pages/profile/profile-page';
 
 export const AppRoutes = () => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Theme } from '@emotion/react';
 import { useTranslation } from 'react-i18next';
-import { isRetryableError } from '../../utils/errors';
-import { Button } from '../buttons';
+import { isRetryableError } from '@global/utils/errors';
+import { Button } from '@global/components/buttons';
 import { ButtonType } from '@global/utils/enum';
 
 function paragraphStyles(theme: Theme) {
