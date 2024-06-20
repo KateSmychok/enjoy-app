@@ -30,29 +30,27 @@ function ProfilePageInner() {
       <Tabs<ActivityType>
         tabs={activityTabs}
         selectedTab={selectedActivityType}
-        onClick={(tab: ActivityType) => onSetActivityType(tab)}
+        onSelect={(tab: ActivityType) => onSetActivityType(tab)}
+        size={'m'}
       />
-      {selectedActivityType === ActivityType.Reading && (
-        <>
-          <Tabs<ItemState>
-            tabs={stateTabs}
-            selectedTab={selectedStateType}
-            onClick={(tab: ItemState) => onSetStateType(tab)}
-          />
-          <div css={[columnContainerStyle, yCenteredStyle, fullWidthStyle]}>
-            <UserItemsList
-              items={relevantItems}
-              activityType={selectedActivityType}
-              onOpenAuthModal={() => null}
-            />
-            <Pagination
-              totalPages={totalPages}
-              selectedPage={page}
-              onSelect={onSetPage}
-            />
-          </div>
-        </>
-      )}
+      <Tabs<ItemState>
+        tabs={stateTabs}
+        selectedTab={selectedStateType}
+        onSelect={(tab: ItemState) => onSetStateType(tab)}
+        size={'s'}
+      />
+      <div css={[columnContainerStyle, yCenteredStyle, fullWidthStyle]}>
+        <UserItemsList
+          items={relevantItems}
+          activityType={selectedActivityType}
+          onOpenAuthModal={() => null}
+        />
+        <Pagination
+          totalPages={totalPages}
+          selectedPage={page}
+          onSelect={onSetPage}
+        />
+      </div>
     </div>
   );
 }

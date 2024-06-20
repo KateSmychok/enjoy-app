@@ -3,15 +3,15 @@ import { ActivityType, ItemState } from '@generated/models';
 
 export const activityTabs: TabProps<ActivityType>[] = [
   {
-    name: 'Books',
+    name: 'Reading',
     type: ActivityType.Reading,
   },
   {
-    name: 'Series',
+    name: 'Watching',
     type: ActivityType.Watching,
   },
   {
-    name: 'Games',
+    name: 'Playing',
     type: ActivityType.Playing,
   },
 ];

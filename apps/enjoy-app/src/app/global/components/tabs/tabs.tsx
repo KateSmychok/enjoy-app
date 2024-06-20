@@ -9,10 +9,11 @@ export interface TabProps<T> {
 interface Props<T> {
   tabs: TabProps<T>[];
   selectedTab: T;
-  onClick: (tab: T) => void;
+  onSelect: (tab: T) => void;
+  size: 's' | 'm' | 'l';
 }
 
-function Tabs<T>({ tabs, selectedTab, onClick }: Props<T>) {
+function Tabs<T>({ tabs, selectedTab, onSelect, size }: Props<T>) {
   return (
     <ul css={listStyle}>
       {tabs.map((tab, i) => {
@@ -20,9 +21,9 @@ function Tabs<T>({ tabs, selectedTab, onClick }: Props<T>) {
           <li
             key={tab.name}
             css={[itemStyle, selectedTab === tab.type && itemActiveStyle]}
-            onClick={() => onClick(tab.type)}
+            onClick={() => onSelect(tab.type)}
           >
-            <span css={textStyle}>{tab.name}</span>
+            <span css={(theme) => textStyle(theme, size)}>{tab.name}</span>
           </li>
         );
       })}
@@ -31,14 +32,14 @@ function Tabs<T>({ tabs, selectedTab, onClick }: Props<T>) {
 }
 
 const listStyle = () => css`
-  width: 100%;
   display: flex;
   list-style-type: none;
+  margin-bottom: 48px;
 `;
 
 const itemStyle = () => css`
   width: fit-content;
-  padding: 16px;
+  padding: 16px 24px;
   margin-right: 24px;
   border-bottom: 3px solid transparent;
   display: flex;
@@ -51,8 +52,10 @@ const itemStyle = () => css`
   }
 `;
 
-const textStyle = (theme: Theme) => css`
-  ${theme.textStyles.bodyLarge};
+const textStyle = (theme: Theme, size: 's' | 'm' | 'l') => css`
+  ${size === 's' && theme.textStyles.titleS};
+  ${size === 'm' && theme.textStyles.titleM};
+  ${size === 'l' && theme.textStyles.titleL};
 `;
 
 const itemActiveStyle = (theme: Theme) => css`

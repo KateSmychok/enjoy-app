@@ -41,5 +41,5 @@ export const getUsersType = (type: ActivityType): string => {
 };
 
 export const mapDtoToId = <T extends { id: number }>(items: T[]): number[] => {
-  return items.map((i) => i.id);
+  return items?.map((i) => i.id);
 };

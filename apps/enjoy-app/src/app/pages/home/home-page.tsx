@@ -5,7 +5,7 @@ import { useHomePage } from './use-home-page';
 import TopItemsList from '../../layouts/top-items-list/top-items-list';
 import {
   columnContainerStyle,
-  fullWidthStyle,
+  fullWidthStyle, xCenteredStyle,
   yCenteredStyle,
 } from '@global/common-styles';
 import { Pagination } from '@global/components/pagination/pagination';
@@ -35,11 +35,14 @@ function HomePageInner() {
   return (
     <div id={'home-page'}>
       <AboutBlock />
-      <Tabs<ActivityType>
-        tabs={activityTabs}
-        selectedTab={selectedActivityType}
-        onClick={(tab: ActivityType) => onSetActivityType(tab)}
-      />
+      <div css={xCenteredStyle}>
+        <Tabs<ActivityType>
+          tabs={activityTabs}
+          selectedTab={selectedActivityType}
+          onSelect={(tab: ActivityType) => onSetActivityType(tab)}
+          size={'m'}
+        />
+      </div>
       {!isLoading && (
         <div css={[columnContainerStyle, yCenteredStyle, fullWidthStyle]}>
           <TopItemsList
