@@ -14,13 +14,23 @@
 
 
 
-export * from './api/auth-api';
-export * from './api/books-api';
-export * from './api/books-rating-api';
-export * from './api/games-api';
-export * from './api/games-rating-api';
-export * from './api/profile-api';
-export * from './api/series-api';
-export * from './api/series-rating-api';
-export * from './api/users-api';
+/**
+ * 
+ * @export
+ * @interface GiveSeriesRatingDto
+ */
+export interface GiveSeriesRatingDto {
+    /**
+     * seriesId
+     * @type {number}
+     * @memberof GiveSeriesRatingDto
+     */
+    'seriesId': number;
+    /**
+     * value
+     * @type {number}
+     * @memberof GiveSeriesRatingDto
+     */
+    'value': number;
+}
 

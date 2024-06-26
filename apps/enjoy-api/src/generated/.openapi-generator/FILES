@@ -8,6 +8,8 @@ api/books-rating-api.ts
 api/games-api.ts
 api/games-rating-api.ts
 api/profile-api.ts
+api/series-api.ts
+api/series-rating-api.ts
 api/users-api.ts
 base.ts
 common.ts
@@ -21,9 +23,11 @@ models/book-dto.ts
 models/change-activity-state-dto.ts
 models/create-book-dto.ts
 models/create-game-dto.ts
+models/create-series-dto.ts
 models/game-dto.ts
 models/give-book-rating-dto.ts
 models/give-game-rating-dto.ts
+models/give-series-rating-dto.ts
 models/index.ts
 models/item-state.ts
 models/series-dto.ts

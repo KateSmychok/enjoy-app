@@ -9,6 +9,12 @@ const initialState: UserDto = {
   booksInProgress: [],
   booksCompleted: [],
   booksPlanned: [],
+  gamesInProgress: [],
+  gamesCompleted: [],
+  gamesPlanned: [],
+  seriesInProgress: [],
+  seriesCompleted: [],
+  seriesPlanned: [],
 };
 
 export const userSlice = createSlice({

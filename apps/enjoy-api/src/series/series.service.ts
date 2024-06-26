@@ -2,20 +2,19 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { EntityManager, EntityRepository } from '@mikro-orm/mysql';
 import { slice } from 'lodash';
-import { Game } from '../entities/Game';
-import { GamesRating } from '../entities/GamesRating';
 import { GetSeriesQuery } from './queries/get-series.query';
 import { SeriesMapper } from './series.mapper';
 import { CreateSeriesDto } from './dto/create-series.dto';
 import { Series } from '../entities/Series';
+import {SeriesRating} from "../entities/SeriesRating";
 
 @Injectable()
 export class SeriesService {
   constructor(
-    @InjectRepository(Game)
-    private readonly gamesRepository: EntityRepository<Game>,
-    @InjectRepository(GamesRating)
-    private readonly ratingRepository: EntityRepository<GamesRating>,
+    @InjectRepository(Series)
+    private readonly gamesRepository: EntityRepository<Series>,
+    @InjectRepository(SeriesRating)
+    private readonly ratingRepository: EntityRepository<SeriesRating>,
     private readonly getSeriesQuery: GetSeriesQuery,
     private readonly seriesMapper: SeriesMapper,
     private em: EntityManager,

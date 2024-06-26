@@ -2,19 +2,21 @@ import axios, { AxiosInstance } from 'axios';
 import { ToastType } from '../../utils/enum';
 import {
   AuthApi,
-  BookRatingApi,
+  BooksRatingApi,
   BooksApi,
   UsersApi,
-  ProfileApi,
+  ProfileApi, GamesApi, GamesRatingApi
 } from '@generated/index';
 import { environment } from '../../../../environments/environment';
 
 export interface IApiClient {
   auth: AuthApi;
-  books: BooksApi;
   users: UsersApi;
   profile: ProfileApi;
-  bookRating: BookRatingApi;
+  books: BooksApi;
+  booksRating: BooksRatingApi;
+  games: GamesApi;
+  gamesRating: GamesRatingApi;
 }
 
 export class ApiClient implements IApiClient {
@@ -22,7 +24,9 @@ export class ApiClient implements IApiClient {
   books: BooksApi;
   users: UsersApi;
   profile: ProfileApi;
-  bookRating: BookRatingApi;
+  booksRating: BooksRatingApi;
+  games: GamesApi;
+  gamesRating: GamesRatingApi;
 
   private readonly ax: AxiosInstance;
 
@@ -70,6 +74,8 @@ export class ApiClient implements IApiClient {
     this.users = new UsersApi(null as any, baseURL, this.ax);
     this.profile = new ProfileApi(null as any, baseURL, this.ax);
     this.books = new BooksApi(null as any, baseURL, this.ax);
-    this.bookRating = new BookRatingApi(null as any, baseURL, this.ax);
+    this.booksRating = new BooksRatingApi(null as any, baseURL, this.ax);
+    this.games = new GamesApi(null as any, baseURL, this.ax);
+    this.gamesRating = new GamesRatingApi(null as any, baseURL, this.ax);
   }
 }

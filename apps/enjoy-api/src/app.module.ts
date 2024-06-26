@@ -10,6 +10,8 @@ import { ConfigModule } from '@nestjs/config';
 import { BaseEntity } from './entities/base.entity';
 import { GamesModule } from './games/games.module';
 import { GamesRatingModule } from './games-rating/games-rating.module';
+import {SeriesModule} from "./series/series.module";
+import {SeriesRatingModule} from "./series-rating/series-rating.module";
 
 @Module({
   controllers: [],
@@ -35,6 +37,8 @@ import { GamesRatingModule } from './games-rating/games-rating.module';
     BooksRatingModule,
     GamesModule,
     GamesRatingModule,
+    SeriesModule,
+    SeriesRatingModule,
   ],
   exports: [],
 })
