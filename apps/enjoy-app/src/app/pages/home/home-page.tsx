@@ -5,7 +5,8 @@ import { useHomePage } from './use-home-page';
 import TopItemsList from '../../layouts/top-items-list/top-items-list';
 import {
   columnContainerStyle,
-  fullWidthStyle, xCenteredStyle,
+  fullWidthStyle,
+  xCenteredStyle,
   yCenteredStyle,
 } from '@global/common-styles';
 import { Pagination } from '@global/components/pagination/pagination';

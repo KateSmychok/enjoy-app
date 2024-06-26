@@ -9,7 +9,7 @@ import { BooksRatingModule } from './books-rating/books-rating.module';
 import { ConfigModule } from '@nestjs/config';
 import { BaseEntity } from './entities/base.entity';
 import { GamesModule } from './games/games.module';
-import { GamesRatingModule } from './game-rating/games-rating.module';
+import { GamesRatingModule } from './games-rating/games-rating.module';
 
 @Module({
   controllers: [],

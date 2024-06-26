@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import {debounce, slice} from 'lodash';
+import { debounce, slice } from 'lodash';
 import { useApiClient } from '@global/modules/api-client';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { homePageSliceActions } from '@store/reducers/home-page-slice';

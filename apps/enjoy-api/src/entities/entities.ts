@@ -5,6 +5,7 @@ import { GamesRating } from './GamesRating';
 import { Series } from './Series';
 import { Token } from './Token';
 import { User } from './User';
+import { SeriesRating } from './SeriesRating';
 
 export const entities = [
   Book,
@@ -12,6 +13,7 @@ export const entities = [
   Game,
   GamesRating,
   Series,
+  SeriesRating,
   Token,
   User,
 ];
