@@ -17,55 +17,49 @@
 /**
  * 
  * @export
- * @interface BookDto
+ * @interface SeriesDto
  */
-export interface BookDto {
+export interface SeriesDto {
     /**
      * 
      * @type {number}
-     * @memberof BookDto
+     * @memberof SeriesDto
      */
     'id': number;
     /**
      * 
      * @type {string}
-     * @memberof BookDto
-     */
-    'author': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BookDto
+     * @memberof SeriesDto
      */
     'title': string;
     /**
      * 
      * @type {string}
-     * @memberof BookDto
+     * @memberof SeriesDto
      */
     'description'?: string;
     /**
      * 
      * @type {number}
-     * @memberof BookDto
+     * @memberof SeriesDto
      */
     'rating'?: number;
     /**
      * 
      * @type {number}
-     * @memberof BookDto
+     * @memberof SeriesDto
      */
     'inProgress'?: number;
     /**
      * 
      * @type {number}
-     * @memberof BookDto
+     * @memberof SeriesDto
      */
     'completed'?: number;
     /**
      * 
      * @type {number}
-     * @memberof BookDto
+     * @memberof SeriesDto
      */
     'planned'?: number;
 }

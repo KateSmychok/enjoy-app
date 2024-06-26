@@ -33,6 +33,42 @@ export class UsersMapper {
       title: b.title,
     }));
 
+    const gamesInProgress = await user.gamesInProgress.init();
+    dto.gamesInProgress = Array.from(gamesInProgress).map((g) => ({
+      id: g.id,
+      title: g.title,
+    }));
+
+    const gamesCompleted = await user.gamesCompleted.init();
+    dto.gamesCompleted = Array.from(gamesCompleted).map((g) => ({
+      id: g.id,
+      title: g.title,
+    }));
+
+    const gamesPlanned = await user.gamesPlanned.init();
+    dto.gamesPlanned = Array.from(gamesPlanned).map((g) => ({
+      id: g.id,
+      title: g.title,
+    }));
+
+    const seriesInProgress = await user.seriesInProgress.init();
+    dto.seriesInProgress = Array.from(seriesInProgress).map((s) => ({
+      id: s.id,
+      title: s.title,
+    }));
+
+    const seriesCompleted = await user.seriesCompleted.init();
+    dto.seriesCompleted = Array.from(seriesCompleted).map((s) => ({
+      id: s.id,
+      title: s.title,
+    }));
+
+    const seriesPlanned = await user.seriesPlanned.init();
+    dto.seriesPlanned = Array.from(seriesPlanned).map((s) => ({
+      id: s.id,
+      title: s.title,
+    }));
+
     return dto;
   }
 }

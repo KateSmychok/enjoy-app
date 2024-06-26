@@ -27,7 +27,7 @@ export class UsersService {
     return user;
   }
 
-  async createUser(input: CreateUserDto) {
+  async createUser(input: CreateUserDto, admin = false) {
     const { email, password, activationLink } = input;
     if (!email || !password) {
       throw new HttpException(
@@ -40,7 +40,7 @@ export class UsersService {
       email,
       password,
       activationLink,
-      roles: ['USER'], // hardcoded for new users with a role 'User'
+      roles: ['USER', admin && 'ADMIN'],
     });
 
     await this.em.persistAndFlush(user);

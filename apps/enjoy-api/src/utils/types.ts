@@ -1,14 +1,3 @@
-export type UserActivityType =
-  | 'booksInProgress'
-  | 'booksCompleted'
-  | 'booksPlanned'
-  | 'gamesInProgress'
-  | 'gamesCompleted'
-  | 'gamesPlanned'
-  | 'seriesInProgress'
-  | 'seriesCompleted'
-  | 'seriesPlanned';
-
 export type UserBooksType =
   | 'booksInProgress'
   | 'booksCompleted'
@@ -23,3 +12,5 @@ export type UserSeriesType =
   | 'seriesInProgress'
   | 'seriesCompleted'
   | 'seriesPlanned';
+
+export type UserActivityType = UserBooksType & UserGamesType & UserSeriesType;

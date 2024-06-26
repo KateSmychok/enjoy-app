@@ -3,8 +3,10 @@
 .openapi-generator-ignore
 api.ts
 api/auth-api.ts
-api/book-rating-api.ts
 api/books-api.ts
+api/books-rating-api.ts
+api/games-api.ts
+api/games-rating-api.ts
 api/profile-api.ts
 api/users-api.ts
 base.ts
@@ -18,7 +20,11 @@ models/auth-user-input-dto.ts
 models/book-dto.ts
 models/change-activity-state-dto.ts
 models/create-book-dto.ts
+models/create-game-dto.ts
+models/game-dto.ts
 models/give-book-rating-dto.ts
+models/give-game-rating-dto.ts
 models/index.ts
 models/item-state.ts
+models/series-dto.ts
 models/user-dto.ts

@@ -15,16 +15,22 @@
 
 
 /**
- * item state
+ * 
  * @export
- * @enum {string}
+ * @interface GiveGameRatingDto
  */
-
-export enum ItemState {
-    InProgress = 'InProgress',
-    Completed = 'Completed',
-    Planned = 'Planned'
+export interface GiveGameRatingDto {
+    /**
+     * gameId
+     * @type {number}
+     * @memberof GiveGameRatingDto
+     */
+    'gameId': number;
+    /**
+     * value
+     * @type {number}
+     * @memberof GiveGameRatingDto
+     */
+    'value': number;
 }
-
-
 

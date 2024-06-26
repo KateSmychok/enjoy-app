@@ -22,26 +22,26 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ChangeActivityStateDto } from '../models';
+import { CreateGameDto } from '../models';
 // @ts-ignore
-import { UserDto } from '../models';
+import { GameDto } from '../models';
 /**
- * ProfileApi - axios parameter creator
+ * GamesApi - axios parameter creator
  * @export
  */
-export const ProfileApiAxiosParamCreator = function (configuration?: Configuration) {
+export const GamesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
          * @summary 
-         * @param {ChangeActivityStateDto} changeActivityStateDto 
+         * @param {CreateGameDto} createGameDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        changeActivityState: async (changeActivityStateDto: ChangeActivityStateDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'changeActivityStateDto' is not null or undefined
-            assertParamExists('changeActivityState', 'changeActivityStateDto', changeActivityStateDto)
-            const localVarPath = `/profile/state`;
+        addGame: async (createGameDto: CreateGameDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createGameDto' is not null or undefined
+            assertParamExists('addGame', 'createGameDto', createGameDto)
+            const localVarPath = `/games`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -49,7 +49,7 @@ export const ProfileApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -60,7 +60,7 @@ export const ProfileApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(changeActivityStateDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createGameDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -73,8 +73,8 @@ export const ProfileApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUser: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/profile/me`;
+        getAllGames: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/games`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -101,23 +101,23 @@ export const ProfileApiAxiosParamCreator = function (configuration?: Configurati
 };
 
 /**
- * ProfileApi - functional programming interface
+ * GamesApi - functional programming interface
  * @export
  */
-export const ProfileApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ProfileApiAxiosParamCreator(configuration)
+export const GamesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = GamesApiAxiosParamCreator(configuration)
     return {
         /**
          * 
          * @summary 
-         * @param {ChangeActivityStateDto} changeActivityStateDto 
+         * @param {CreateGameDto} createGameDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async changeActivityState(changeActivityStateDto: ChangeActivityStateDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.changeActivityState(changeActivityStateDto, options);
+        async addGame(createGameDto: CreateGameDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GameDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addGame(createGameDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProfileApi.changeActivityState']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GamesApi.addGame']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -126,31 +126,31 @@ export const ProfileApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUser(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUser(options);
+        async getAllGames(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GameDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllGames(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProfileApi.getUser']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GamesApi.getAllGames']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * ProfileApi - factory interface
+ * GamesApi - factory interface
  * @export
  */
-export const ProfileApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ProfileApiFp(configuration)
+export const GamesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = GamesApiFp(configuration)
     return {
         /**
          * 
          * @summary 
-         * @param {ChangeActivityStateDto} changeActivityStateDto 
+         * @param {CreateGameDto} createGameDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        changeActivityState(changeActivityStateDto: ChangeActivityStateDto, options?: any): AxiosPromise<void> {
-            return localVarFp.changeActivityState(changeActivityStateDto, options).then((request) => request(axios, basePath));
+        addGame(createGameDto: CreateGameDto, options?: any): AxiosPromise<GameDto> {
+            return localVarFp.addGame(createGameDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -158,56 +158,56 @@ export const ProfileApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUser(options?: any): AxiosPromise<UserDto> {
-            return localVarFp.getUser(options).then((request) => request(axios, basePath));
+        getAllGames(options?: any): AxiosPromise<Array<GameDto>> {
+            return localVarFp.getAllGames(options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * ProfileApi - interface
+ * GamesApi - interface
  * @export
- * @interface ProfileApi
+ * @interface GamesApi
  */
-export interface ProfileApiInterface {
+export interface GamesApiInterface {
     /**
      * 
      * @summary 
-     * @param {ChangeActivityStateDto} changeActivityStateDto 
+     * @param {CreateGameDto} createGameDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProfileApiInterface
+     * @memberof GamesApiInterface
      */
-    changeActivityState(changeActivityStateDto: ChangeActivityStateDto, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    addGame(createGameDto: CreateGameDto, options?: RawAxiosRequestConfig): AxiosPromise<GameDto>;
 
     /**
      * 
      * @summary 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProfileApiInterface
+     * @memberof GamesApiInterface
      */
-    getUser(options?: RawAxiosRequestConfig): AxiosPromise<UserDto>;
+    getAllGames(options?: RawAxiosRequestConfig): AxiosPromise<Array<GameDto>>;
 
 }
 
 /**
- * ProfileApi - object-oriented interface
+ * GamesApi - object-oriented interface
  * @export
- * @class ProfileApi
+ * @class GamesApi
  * @extends {BaseAPI}
  */
-export class ProfileApi extends BaseAPI implements ProfileApiInterface {
+export class GamesApi extends BaseAPI implements GamesApiInterface {
     /**
      * 
      * @summary 
-     * @param {ChangeActivityStateDto} changeActivityStateDto 
+     * @param {CreateGameDto} createGameDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProfileApi
+     * @memberof GamesApi
      */
-    public changeActivityState(changeActivityStateDto: ChangeActivityStateDto, options?: RawAxiosRequestConfig) {
-        return ProfileApiFp(this.configuration).changeActivityState(changeActivityStateDto, options).then((request) => request(this.axios, this.basePath));
+    public addGame(createGameDto: CreateGameDto, options?: RawAxiosRequestConfig) {
+        return GamesApiFp(this.configuration).addGame(createGameDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -215,10 +215,10 @@ export class ProfileApi extends BaseAPI implements ProfileApiInterface {
      * @summary 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProfileApi
+     * @memberof GamesApi
      */
-    public getUser(options?: RawAxiosRequestConfig) {
-        return ProfileApiFp(this.configuration).getUser(options).then((request) => request(this.axios, this.basePath));
+    public getAllGames(options?: RawAxiosRequestConfig) {
+        return GamesApiFp(this.configuration).getAllGames(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -15,16 +15,22 @@
 
 
 /**
- * item state
+ * 
  * @export
- * @enum {string}
+ * @interface CreateGameDto
  */
-
-export enum ItemState {
-    InProgress = 'InProgress',
-    Completed = 'Completed',
-    Planned = 'Planned'
+export interface CreateGameDto {
+    /**
+     * title
+     * @type {string}
+     * @memberof CreateGameDto
+     */
+    'title': string;
+    /**
+     * description
+     * @type {string}
+     * @memberof CreateGameDto
+     */
+    'description'?: string;
 }
-
-
 

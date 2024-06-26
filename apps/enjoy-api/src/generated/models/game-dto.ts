@@ -17,55 +17,49 @@
 /**
  * 
  * @export
- * @interface BookDto
+ * @interface GameDto
  */
-export interface BookDto {
+export interface GameDto {
     /**
      * 
      * @type {number}
-     * @memberof BookDto
+     * @memberof GameDto
      */
     'id': number;
     /**
      * 
      * @type {string}
-     * @memberof BookDto
-     */
-    'author': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BookDto
+     * @memberof GameDto
      */
     'title': string;
     /**
      * 
      * @type {string}
-     * @memberof BookDto
+     * @memberof GameDto
      */
     'description'?: string;
     /**
      * 
      * @type {number}
-     * @memberof BookDto
+     * @memberof GameDto
      */
     'rating'?: number;
     /**
      * 
      * @type {number}
-     * @memberof BookDto
+     * @memberof GameDto
      */
     'inProgress'?: number;
     /**
      * 
      * @type {number}
-     * @memberof BookDto
+     * @memberof GameDto
      */
     'completed'?: number;
     /**
      * 
      * @type {number}
-     * @memberof BookDto
+     * @memberof GameDto
      */
     'planned'?: number;
 }

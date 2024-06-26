@@ -65,49 +65,49 @@ export class ProfileService {
 
     if (activityType === ActivityType.Reading) {
       const key = ('books' + getItemState(itemState)) as UserBooksType;
-      const collection = await user[key].init();
-      const item = await this.booksRepository.findOneOrFail({ id });
+      const books = await user[key].init();
+      const book = await this.booksRepository.findOneOrFail({ id });
 
       if (
-        Array.from(collection)
+        Array.from(books)
           .map((i) => i.id)
           .includes(id)
       ) {
-        collection.remove(item);
+        books.remove(book);
       } else {
-        collection.add(item);
+        books.add(book);
       }
     }
 
     if (activityType === ActivityType.Playing) {
       const key = ('games' + getItemState(itemState)) as UserGamesType;
-      const collection = await user[key].init();
-      const item = await this.gamesRepository.findOneOrFail({ id });
+      const games = await user[key].init();
+      const game = await this.gamesRepository.findOneOrFail({ id });
 
       if (
-        Array.from(collection)
+        Array.from(games)
           .map((i) => i.id)
           .includes(id)
       ) {
-        collection.remove(item);
+        games.remove(game);
       } else {
-        collection.add(item);
+        games.add(game);
       }
     }
 
     if (activityType === ActivityType.Watching) {
       const key = ('series' + getItemState(itemState)) as UserSeriesType;
-      const collection = await user[key].init();
+      const series = await user[key].init();
       const item = await this.seriesRepository.findOneOrFail({ id });
 
       if (
-        Array.from(collection)
+        Array.from(series)
           .map((i) => i.id)
           .includes(id)
       ) {
-        collection.remove(item);
+        series.remove(item);
       } else {
-        collection.add(item);
+        series.add(item);
       }
     }
     await this.em.flush();
