@@ -36,7 +36,7 @@ export class GetGamesQuery {
         qb.on('g.id', 'c.game_id'),
       )
       .leftJoin('users_games_planned as p', (qb) => qb.on('g.id', 'p.game_id'))
-      .leftJoin('game_rating as r', (qb) => qb.on('g.id', 'r.game_id'))
+      .leftJoin('games_rating as r', (qb) => qb.on('g.id', 'r.game_id'))
       .orderBy('inProgress', 'desc')
       .groupBy('g.id');
   }

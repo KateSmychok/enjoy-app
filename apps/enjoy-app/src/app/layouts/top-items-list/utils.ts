@@ -35,8 +35,6 @@ export const getUsersType = (type: ActivityType): string => {
       return 'watchers';
     case ActivityType.Playing:
       return 'gamers';
-    default:
-      return '';
   }
 };
 

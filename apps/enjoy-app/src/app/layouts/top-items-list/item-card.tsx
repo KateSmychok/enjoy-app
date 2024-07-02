@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { css, Theme } from '@emotion/react';
 import {
   columnContainerStyle,
@@ -9,7 +9,7 @@ import { ButtonType } from '@global/utils/enum';
 import { Button } from '@global/components/buttons';
 import { useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
-import { getKey, getUsersType, mapDtoToId, UsersActivityState } from './utils';
+import { getUsersType, UsersActivityState } from './utils';
 import { ActivityType, ItemState, UserDto } from '@generated/models';
 import { Item } from '@global/interfaces';
 
@@ -17,6 +17,7 @@ interface Props {
   data: Item;
   index: number;
   activityType: ActivityType;
+  usersActivityState: UsersActivityState;
   onChangeItemState: (id: number, itemState: ItemState) => void;
   onOpenAuthModal: () => void;
 }
@@ -25,29 +26,12 @@ function ItemCard({
   data,
   index,
   activityType,
+  usersActivityState,
   onChangeItemState,
   onOpenAuthModal,
 }: Props) {
   const user: UserDto = useAppSelector((state: RootState) => state.userReducer);
   const itemId = data.id;
-
-  const usersActivityState: UsersActivityState = useMemo(() => {
-    return user.id
-      ? {
-          inProgress: mapDtoToId(
-            user[getKey(activityType, ItemState.InProgress)],
-          ),
-          completed: mapDtoToId(
-            user[getKey(activityType, ItemState.Completed)],
-          ),
-          planned: mapDtoToId(user[getKey(activityType, ItemState.Planned)]),
-        }
-      : {
-          inProgress: [],
-          completed: [],
-          planned: [],
-        };
-  }, [user]);
 
   const onBtnClick = (itemState: ItemState) => {
     if (user.id) {
@@ -61,9 +45,11 @@ function ItemCard({
     <li css={[rowContainerStyle, containerStyle, yCenteredStyle]}>
       <div css={(theme) => indexStyle(theme)}>{index + 1}</div>
       <div css={[columnContainerStyle, dataStyle]}>
-        <p css={bookTitleStyle}>{`${data.author} ${data.title}`}</p>
         <p
-          css={readersCountStyle}
+          css={titleStyle}
+        >{`${activityType === ActivityType.Reading ? data.author : ''} ${data.title}`}</p>
+        <p
+          css={usersCountStyle}
         >{`${data.inProgress} ${getUsersType(activityType)}`}</p>
       </div>
       <div css={[columnContainerStyle, buttonsContainerStyle]}>
@@ -119,11 +105,11 @@ const dataStyle = () => css`
   width: 80%;
 `;
 
-const bookTitleStyle = (theme: Theme) => css`
+const titleStyle = (theme: Theme) => css`
   ${theme.textStyles.titleS}
 `;
 
-const readersCountStyle = (theme: Theme) => css`
+const usersCountStyle = (theme: Theme) => css`
   ${theme.textStyles.bodyLarge};
   color: ${theme.colours.textSecondary};
 `;

@@ -5,7 +5,11 @@ import {
   BooksRatingApi,
   BooksApi,
   UsersApi,
-  ProfileApi, GamesApi, GamesRatingApi
+  ProfileApi,
+  GamesApi,
+  GamesRatingApi,
+  SeriesApi,
+  SeriesRatingApi,
 } from '@generated/index';
 import { environment } from '../../../../environments/environment';
 
@@ -17,6 +21,8 @@ export interface IApiClient {
   booksRating: BooksRatingApi;
   games: GamesApi;
   gamesRating: GamesRatingApi;
+  series: SeriesApi;
+  seriesRating: SeriesRatingApi;
 }
 
 export class ApiClient implements IApiClient {
@@ -27,6 +33,8 @@ export class ApiClient implements IApiClient {
   booksRating: BooksRatingApi;
   games: GamesApi;
   gamesRating: GamesRatingApi;
+  series: SeriesApi;
+  seriesRating: SeriesRatingApi;
 
   private readonly ax: AxiosInstance;
 
@@ -77,5 +85,7 @@ export class ApiClient implements IApiClient {
     this.booksRating = new BooksRatingApi(null as any, baseURL, this.ax);
     this.games = new GamesApi(null as any, baseURL, this.ax);
     this.gamesRating = new GamesRatingApi(null as any, baseURL, this.ax);
+    this.series = new SeriesApi(null as any, baseURL, this.ax);
+    this.seriesRating = new SeriesRatingApi(null as any, baseURL, this.ax);
   }
 }

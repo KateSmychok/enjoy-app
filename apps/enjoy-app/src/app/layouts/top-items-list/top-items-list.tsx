@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import ItemCard from './item-card';
 import {
   columnContainerStyle,
@@ -9,11 +9,15 @@ import {
   ActivityType,
   ChangeActivityStateDto,
   ItemState,
+  UserDto,
 } from '@generated/models';
 import { useApiClient } from '@global/modules/api-client';
-import { useAppDispatch } from '@store/hooks';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { userSliceActions } from '@store/reducers/user-slice';
 import { Item } from '@global/interfaces';
+import { getKey, mapDtoToId, UsersActivityState } from './utils';
+import { RootState } from '@store/store';
+import { topItemsSliceActions } from '@store/reducers/top-items-slice';
 
 interface Props {
   items: Item[];
@@ -25,6 +29,26 @@ function TopItemsList({ items, activityType, onOpenAuthModal }: Props) {
   const client = useApiClient();
   const dispatch = useAppDispatch();
 
+  const user: UserDto = useAppSelector((state: RootState) => state.userReducer);
+
+  const usersActivityState: UsersActivityState = useMemo(() => {
+    return user.id
+      ? {
+          inProgress: mapDtoToId(
+            user[getKey(activityType, ItemState.InProgress)],
+          ),
+          completed: mapDtoToId(
+            user[getKey(activityType, ItemState.Completed)],
+          ),
+          planned: mapDtoToId(user[getKey(activityType, ItemState.Planned)]),
+        }
+      : {
+          inProgress: [],
+          completed: [],
+          planned: [],
+        };
+  }, [user, activityType]);
+
   const handleChangeItemState = async (id: number, itemState: ItemState) => {
     await client.profile.changeActivityState({
       id,
@@ -33,6 +57,16 @@ function TopItemsList({ items, activityType, onOpenAuthModal }: Props) {
     } as ChangeActivityStateDto);
     const { data } = await client.profile.getUser();
     dispatch(userSliceActions.setUser(data));
+
+    if (itemState === ItemState.InProgress) {
+      dispatch(
+        topItemsSliceActions.changeCount({
+          id,
+          activityType,
+          increase: !usersActivityState.inProgress.includes(id),
+        }),
+      );
+    }
   };
 
   return (
@@ -43,6 +77,7 @@ function TopItemsList({ items, activityType, onOpenAuthModal }: Props) {
           data={i}
           index={index}
           activityType={activityType}
+          usersActivityState={usersActivityState}
           onChangeItemState={handleChangeItemState}
           onOpenAuthModal={onOpenAuthModal}
         />

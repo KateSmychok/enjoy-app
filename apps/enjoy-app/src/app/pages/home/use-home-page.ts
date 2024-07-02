@@ -1,13 +1,18 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { debounce, slice } from 'lodash';
 import { useApiClient } from '@global/modules/api-client';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { homePageSliceActions } from '@store/reducers/home-page-slice';
-import { booksSliceActions } from '@store/reducers/books-slice';
+import { topItemsSliceActions } from '@store/reducers/top-items-slice';
 import { authSliceActions } from '@store/reducers/auth-slice';
 import { RootState } from '@store/store';
 import { AuthMode } from '@global/utils/enum';
-import { ActivityType } from '@generated/models';
+import {
+  ActivityType,
+  BookDto,
+  GameDto,
+  SeriesDto,
+} from '@generated/models';
 import { Item } from '@global/interfaces';
 
 interface UseHomePage {
@@ -29,6 +34,8 @@ export const useHomePage = (): UseHomePage => {
   const client = useApiClient();
   const dispatch = useAppDispatch();
 
+  const [isInitialized, setIsInitialized] = useState(false);
+
   const { isLoggedIn, isAuthModalOpened, mode } = useAppSelector(
     (state: RootState) => state.authReducer,
   );
@@ -40,20 +47,46 @@ export const useHomePage = (): UseHomePage => {
     totalPages,
     rowsPerPage,
   } = useAppSelector((state: RootState) => state.homePageReducer);
-  const { allBooks } = useAppSelector((state: RootState) => state.booksReducer);
+  const { books, games, series } = useAppSelector(
+    (state: RootState) => state.topItemsReducer,
+  );
 
-  // FIXME - games, series
-  const items = useMemo(() => {
+  const getItems = (): Item[] => {
     switch (selectedActivityType) {
       case ActivityType.Reading:
-        return allBooks;
+        return books;
+      case ActivityType.Playing:
+        return games;
+      case ActivityType.Watching:
+        return series;
     }
-  }, [selectedActivityType]);
+  };
+
+  useEffect(() => {
+    dispatch(homePageSliceActions.setIsLoading(true));
+    dispatch(
+      homePageSliceActions.setRelevantItems(slice(getItems(), 0, rowsPerPage)),
+    );
+    dispatch(
+      homePageSliceActions.setTotalPages(
+        Math.ceil(getItems.length / rowsPerPage),
+      ),
+    );
+    dispatch(homePageSliceActions.setIsLoading(false));
+  }, [selectedActivityType, isInitialized]);
+
+  useEffect(() => {
+    dispatch(
+      homePageSliceActions.setRelevantItems(slice(getItems(), 0, rowsPerPage)),
+    );
+  }, [books, games, series]);
 
   const handleSetPage = (v: number) => {
     const skip = (v - 1) * rowsPerPage;
     const limit = skip + rowsPerPage;
-    dispatch(homePageSliceActions.setRelevantItems(slice(items, skip, limit)));
+    dispatch(
+      homePageSliceActions.setRelevantItems(slice(getItems(), skip, limit)),
+    );
     dispatch(homePageSliceActions.setPage(v));
   };
 
@@ -69,23 +102,22 @@ export const useHomePage = (): UseHomePage => {
     dispatch(homePageSliceActions.setActivityType(type));
   };
 
-  const getTopItems = async () => {
-    const { data } = await client.books.getAllBooks();
-    const skip = (page - 1) * rowsPerPage;
-    const limit = skip + rowsPerPage;
+  const init = async () => {
+    const [booksRes, gamesRes, seriesRes] = await Promise.all([
+      client.books.getAllBooks(),
+      client.games.getAllGames(),
+      client.series.getAllSeries(),
+    ]);
 
-    dispatch(booksSliceActions.setAllBooks(data));
-    dispatch(
-      homePageSliceActions.setRelevantItems(slice(data as Item[], skip, limit)),
-    );
-    dispatch(
-      homePageSliceActions.setTotalPages(Math.ceil(data.length / rowsPerPage)),
-    );
-    dispatch(homePageSliceActions.setIsLoading(false));
+    dispatch(topItemsSliceActions.setAllBooks(booksRes.data as BookDto[]));
+    dispatch(topItemsSliceActions.setAllGames(gamesRes.data as GameDto[]));
+    dispatch(topItemsSliceActions.setAllSeries(seriesRes.data as SeriesDto[]));
+
+    setIsInitialized(true);
   };
 
   const debouncedInit = debounce(() => {
-    return getTopItems();
+    return init();
   }, 200);
 
   useEffect(() => {

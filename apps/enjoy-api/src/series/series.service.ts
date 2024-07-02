@@ -6,7 +6,7 @@ import { GetSeriesQuery } from './queries/get-series.query';
 import { SeriesMapper } from './series.mapper';
 import { CreateSeriesDto } from './dto/create-series.dto';
 import { Series } from '../entities/Series';
-import {SeriesRating} from "../entities/SeriesRating";
+import { SeriesRating } from '../entities/SeriesRating';
 
 @Injectable()
 export class SeriesService {

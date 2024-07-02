@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BookDto } from '../../books/dto/book.dto';
-import {GameDto} from "../../games/dto/game.dto";
-import {SeriesDto} from "../../series/dto/series.dto";
+import { GameDto } from '../../games/dto/game.dto';
+import { SeriesDto } from '../../series/dto/series.dto';
 
 export class UserDto {
   @ApiProperty({ example: '1', description: 'id' })
