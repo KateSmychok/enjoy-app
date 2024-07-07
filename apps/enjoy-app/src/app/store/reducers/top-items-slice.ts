@@ -44,7 +44,6 @@ export const topItemsSlice = createSlice({
       } else {
         item.inProgress -= 1;
       }
-      items.sort((a, b) => b.inProgress - a.inProgress);
     },
   },
 });

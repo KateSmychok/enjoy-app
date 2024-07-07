@@ -7,17 +7,16 @@ import {
 } from '@global/common-styles';
 import {
   ActivityType,
-  ChangeActivityStateDto,
   ItemState,
   UserDto,
 } from '@generated/models';
 import { useApiClient } from '@global/modules/api-client';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { userSliceActions } from '@store/reducers/user-slice';
+import { topItemsSliceActions } from '@store/reducers/top-items-slice';
 import { Item } from '@global/interfaces';
 import { getKey, mapDtoToId, UsersActivityState } from './utils';
 import { RootState } from '@store/store';
-import { topItemsSliceActions } from '@store/reducers/top-items-slice';
 
 interface Props {
   items: Item[];
@@ -54,7 +53,7 @@ function TopItemsList({ items, activityType, onOpenAuthModal }: Props) {
       id,
       itemState,
       activityType,
-    } as ChangeActivityStateDto);
+    });
     const { data } = await client.profile.getUser();
     dispatch(userSliceActions.setUser(data));
 
