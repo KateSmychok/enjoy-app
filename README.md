@@ -1,9 +1,9 @@
 # EnjoyApp
 
 Enjoy
-- lets you know what is trending among your friends and in the whole world
-- helps to choose an exciting book, series or game
-- connects people with similar interests
+- lets you know what is trending among your friends and in the whole world;
+- helps to choose an exciting book, series or game;
+- connects people with similar interests.
 
 ## Start the application
 
