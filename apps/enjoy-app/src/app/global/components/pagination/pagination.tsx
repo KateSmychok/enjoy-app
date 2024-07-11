@@ -34,6 +34,7 @@ export function Pagination({
 const containerStyle = (theme: Theme) => css`
   display: flex;
   flex-direction: row;
+  align-items: center;
   height: 40px;
   margin-bottom: 50px;
 
