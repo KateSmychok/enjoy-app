@@ -39,6 +39,7 @@ export const useHomePage = (): UseHomePage => {
   const { isLoggedIn, isAuthModalOpened, mode } = useAppSelector(
     (state: RootState) => state.authReducer,
   );
+
   const {
     selectedActivityType,
     relevantItems,
@@ -69,7 +70,7 @@ export const useHomePage = (): UseHomePage => {
     );
     dispatch(
       homePageSliceActions.setTotalPages(
-        Math.ceil(getItems.length / rowsPerPage),
+        Math.ceil(getItems().length / rowsPerPage),
       ),
     );
     dispatch(homePageSliceActions.setIsLoading(false));
