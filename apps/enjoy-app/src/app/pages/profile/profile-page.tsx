@@ -25,6 +25,10 @@ function ProfilePageInner() {
     totalPages,
   } = useProfilePage();
 
+  const isNotReady = true;
+
+  if (isNotReady) return null;
+
   return (
     <div>
       <Tabs<ActivityType>
