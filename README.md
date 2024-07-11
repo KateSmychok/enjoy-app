@@ -1,4 +1,4 @@
-# EnjoyApp
+# EnjoyApp [WIP]
 
 Enjoy
 - lets you know what is trending among your friends and in the whole world;
